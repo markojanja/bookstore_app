@@ -2,6 +2,8 @@ import express from "express";
 import dbConnect from "./config/config.js";
 import rootRouter from "./routes/root.js";
 import booksRouter from "./routes/books.js";
+import errorHandler from "./middleware/errorhandler.js";
+
 
 dbConnect();
 // populateDB();
@@ -19,6 +21,9 @@ app.use("/books", booksRouter);
 app.get("/*", async (req, res) => {
   res.status(404).json({ message: "not found" });
 });
+
+app.use(errorHandler)
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
