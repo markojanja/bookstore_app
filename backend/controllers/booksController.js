@@ -1,12 +1,11 @@
 import Book from "../models/book.js";
 
-
-const getAllBooks = async (req, res) => {
+const getAllBooks = async (req, res, next) => {
   try {
     let data = await Book.find({}).populate("author genre");
-    res.status(200).json({ status:res.status, data });
+    res.status(200).json({ statusCode: res.statusCode, status: "ok", data });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
@@ -17,7 +16,7 @@ const createBook = async (req, res, next) => {
 
     res.status(201).json(data);
   } catch (error) {
-    res.status(500).send({ message: error.status });
+    next(err);
   }
 };
 
@@ -31,27 +30,34 @@ const getSingleBook = async (req, res, next) => {
       return next(err);
     }
 
-    res.status(200).json({ statusCode:res.statusCode,status:'ok',data: book });
+    res
+      .status(200)
+      .json({ statusCode: res.statusCode, status: "ok", data: book });
   } catch (error) {
-
     next(error);
   }
 };
 
-const deleteBook = async (req, res,next) => {
+const updateBook = async (req, res, next) => {
+  res.json({ message: "sample data" });
+};
+
+const deleteBook = async (req, res, next) => {
   let book;
   try {
     const { id } = req.params;
     book = await Book.findById(id);
 
     if (!book) {
-      return res.status(404).json({ message: "Book not found" });
+      const err = new Error("Book not found");
+      err.status = 404;
+      return next(err);
     }
     await book.deleteOne();
     res.status(200).json({ message: "book deleted..." });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    next(error);
   }
 };
 
-export { getAllBooks, createBook, getSingleBook, deleteBook };
+export { getAllBooks, createBook, getSingleBook, updateBook, deleteBook };
