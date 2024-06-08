@@ -3,16 +3,17 @@ import dbConnect from "./config/config.js";
 import rootRouter from "./routes/root.js";
 import booksRouter from "./routes/books.js";
 import errorHandler from "./middleware/errorhandler.js";
-
+import cors from "cors";
 
 dbConnect();
-// populateDB();
+// populateDB(); use this to add data into db with sample data import first
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors());
 
 app.use("/", rootRouter);
 
@@ -22,7 +23,7 @@ app.get("/*", async (req, res) => {
   res.status(404).json({ message: "not found" });
 });
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

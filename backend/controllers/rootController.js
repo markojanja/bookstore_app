@@ -14,7 +14,7 @@ const rootController = async (req, res) => {
   };
 
   try {
-    res.status(200).json({ message: "homepage", data });
+    res.status(200).json({ statusCode:res.statusCode, status:"ok", data });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
