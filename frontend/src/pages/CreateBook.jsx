@@ -1,17 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CreateBook = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [pages, setPages] = useState("");
   const [genre, setGenre] = useState("");
   const [author, setAuthor] = useState("");
 
-  const [genres, setGenres] = useState(["665caf8fd156ac065b1dc918"]);
-  const [authors, setAuthors] = useState(["665caf8fd156ac065b1dc913"]);
+  const [genres, setGenres] = useState([]);
+  const [authors, setAuthors] = useState([]);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/authors/", {
+          mode: "cors",
+        });
+        const authorsData = await res.json();
+        setAuthors(authorsData.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchGenres = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/genres/");
+        const genresData = await res.json();
+        setGenres(genresData.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGenres();
+    fetchAuthors();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +68,7 @@ const CreateBook = () => {
   return (
     <div>
       <form
-        className="flex flex-col border border-black"
+        className="flex flex-col border border-black gap-3 w-4/5 mx-auto p-4"
         onSubmit={handleSubmit}
       >
         <input
@@ -71,10 +97,10 @@ const CreateBook = () => {
           onChange={(e) => setGenre(e.target.value)}
           value={genre}
         >
-          <option value={""}>select option</option>
-          {genres.map((genre, index) => (
-            <option key={index} value={genre}>
-              {"test genre"}
+          <option value={""}>select genre</option>
+          {genres.map((genre) => (
+            <option key={genre._id} value={genre._id}>
+              {genre.title}
             </option>
           ))}
         </select>
@@ -85,11 +111,11 @@ const CreateBook = () => {
           onChange={(e) => setAuthor(e.target.value)}
           value={author}
         >
-          <option value={""}>select option</option>
+          <option value={""}>select author</option>
 
-          {authors.map((author, index) => (
-            <option key={index} value={author}>
-              {"test author"}
+          {authors.map((author) => (
+            <option key={author._id} value={author._id}>
+              {author.firstName} {author.lastName}
             </option>
           ))}
         </select>
