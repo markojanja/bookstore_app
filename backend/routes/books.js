@@ -5,6 +5,7 @@ import {
   updateBook,
   getAllBooks,
   getSingleBook,
+  getBooksByAuthor,
 } from "../controllers/booksController.js";
 import validateObjectId from "../middleware/validateObjectId.js";
 
@@ -12,7 +13,7 @@ const router = express.Router();
 
 router.get("/", getAllBooks);
 router.post("/create", createBook);
-
+router.get("/author/:id", validateObjectId, getBooksByAuthor);
 router.get("/:id", validateObjectId, getSingleBook);
 router.put("/update/:id", validateObjectId, updateBook);
 router.delete("delete/:id", deleteBook);

@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const Author = () => {
   const { id } = useParams();
   const [author, setAuthor] = useState("");
+  const [books, setBooks] = useState([]);
   useEffect(() => {
     const fetchAuthor = async () => {
       try {
@@ -17,9 +19,24 @@ const Author = () => {
         console.log(error);
       }
     };
+    const fetchBooks = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/books/author/${id}`, {
+          mode: "cors",
+        });
+        const booksData = await res.json();
+        console.log(booksData.books);
+        setBooks([...booksData.books]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     fetchAuthor();
-  }, [id]);
+
+    fetchBooks();
+  }, []);
+
   return (
     <div>
       {author && (
@@ -30,6 +47,14 @@ const Author = () => {
           <p>{author.bio}</p>
         </div>
       )}
+      <ul>
+        <h3>
+          Books by:{author.firstName} {author.lastName}
+        </h3>
+        {books.map((book) => (
+          <li key={book._id}>{book.title}</li>
+        ))}
+      </ul>
     </div>
   );
 };

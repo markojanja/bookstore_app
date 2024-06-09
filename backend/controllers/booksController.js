@@ -80,5 +80,22 @@ const deleteBook = async (req, res, next) => {
     next(error);
   }
 };
+const getBooksByAuthor = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const books = await Book.find({ author: id }).populate("author genre");
+    res.status(200).json({ books });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
-export { getAllBooks, createBook, getSingleBook, updateBook, deleteBook };
+export {
+  getAllBooks,
+  getBooksByAuthor,
+  createBook,
+  getSingleBook,
+  updateBook,
+  deleteBook,
+};
