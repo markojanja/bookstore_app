@@ -4,7 +4,7 @@ const validateObjectId = (req, res, next) => {
   const { id } = req.params;
 
   if (id.length !== 24 || !mongoose.Types.ObjectId.isValid(id)) {
-    const err = new Error('Invalid book ID');
+    const err = new Error("Invalid ID");
     err.status = 400; // Bad Request
     return next(err);
   }
@@ -12,6 +12,4 @@ const validateObjectId = (req, res, next) => {
   next();
 };
 
-export default validateObjectId
-
-
+export default validateObjectId;

@@ -14,9 +14,9 @@ const createBook = async (req, res, next) => {
     let data = req.body;
     await Book.create(data);
 
-    res.status(201).json(data);
+    res.status(201).json({ message: "book created" });
   } catch (error) {
-    next(err);
+    next(error);
   }
 };
 
@@ -54,7 +54,7 @@ const deleteBook = async (req, res, next) => {
       return next(err);
     }
     await book.deleteOne();
-    res.status(200).json({ message: "book deleted..." });
+    res.status(202).json({ message: "book deleted..." });
   } catch (error) {
     next(error);
   }
