@@ -39,6 +39,27 @@ const getSingleBook = async (req, res, next) => {
 };
 
 const updateBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, description, pages, genre, author } = req.body;
+    const book = Book.findById(id);
+
+    if (!book) {
+      const err = new Error("Book not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    book.title = title;
+    book.description = description;
+    book.pages = pages;
+    book.author = author;
+    book.genre = genre;
+
+    await book.save();
+  } catch (error) {
+    next(error);
+  }
   res.json({ message: "sample data" });
 };
 
