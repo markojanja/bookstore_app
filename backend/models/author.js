@@ -13,7 +13,6 @@ const authorSchema = mongoose.Schema(
     bio: {
       type: String,
       required: true,
-      maxLength: 500,
     },
   },
   { timestamps: true }

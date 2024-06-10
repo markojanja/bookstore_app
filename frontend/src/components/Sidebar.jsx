@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="fflex flex-col gap-5 items-stretch border-r border-r-lime-500">
+    <div className="flex flex-col gap-5 items-start justify-start mt-4 border-r border-r-lime-500">
       <ul>
         <li>
           <Link to={"/books"}>Books</Link>

@@ -10,7 +10,6 @@ const bookSchema = new Schema(
     description: {
       type: String,
       required: true,
-      maxLength: 500,
     },
     pages: {
       type: Number,

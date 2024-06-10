@@ -28,6 +28,7 @@ const getAuthor = async (req, res, next) => {
 
 const createAuthor = async (req, res, next) => {
   const { firstName, lastName, bio } = req.body;
+
   try {
     const newAuthor = {
       firstName,
@@ -47,8 +48,6 @@ const updateAuthor = async (req, res, next) => {
     const { id } = req.params;
     const author = await Author.findById(id);
     const { firstName, lastName, bio } = req.body;
-
-    console.log(req.body);
 
     author.firstName = firstName;
     author.lastName = lastName;

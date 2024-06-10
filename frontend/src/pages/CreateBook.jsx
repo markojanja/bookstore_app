@@ -49,8 +49,6 @@ const CreateBook = () => {
       author,
     };
 
-    console.log(data);
-
     try {
       await fetch("http://localhost:3000/books/create", {
         method: "POST",
@@ -68,30 +66,30 @@ const CreateBook = () => {
   return (
     <div>
       <form
-        className="flex flex-col border border-black gap-3 w-4/5 mx-auto p-4"
+        className="flex flex-col gap-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         onSubmit={handleSubmit}
       >
         <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           name="title"
           id="title"
           onChange={(e) => setTitle(e.target.value)}
-          className="border border-black"
         />
         <textarea
-          className="border border-black"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           name="description"
           id="description"
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         <input
-          className="border border-black"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="number"
           min={0}
           onChange={(e) => setPages(e.target.value)}
         />
         <select
-          className="border border-black"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           name="genre"
           id="genre"
           onChange={(e) => setGenre(e.target.value)}

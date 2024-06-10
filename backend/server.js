@@ -6,9 +6,10 @@ import authorsRoute from "./routes/authors.js";
 import genresRoute from "./routes/genres.js";
 import errorHandler from "./middleware/errorhandler.js";
 import cors from "cors";
+// import populateDB from "./populatedb.js";
 
 dbConnect();
-// populateDB(); use this to add data into db with sample data import first
+// populateDB(); // use this to add data into db with sample data import first
 
 const app = express();
 
