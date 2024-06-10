@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 
 const CreateAuthor = () => {
   const [firstName, setFirstName] = useState("");
-
   const [lastName, setLastName] = useState("");
   const [bio, setBio] = useState("");
 
   const navigate = useNavigate();
+
+  const url = import.meta.BASE_URL;
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const CreateAuthor = () => {
     };
 
     try {
-      await fetch("http://localhost:3000/authors/create/", {
+      await fetch(`${url}/authors/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
