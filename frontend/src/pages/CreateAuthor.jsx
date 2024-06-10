@@ -36,7 +36,7 @@ const CreateAuthor = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center gap-5">
-        <h2>Add User</h2>
+        <h2>Add Author</h2>
         <form
           className="flex flex-col gap-3 w-[80%] mx-auto"
           onSubmit={handleFormSubmit}
@@ -60,9 +60,14 @@ const CreateAuthor = () => {
             name="bio"
             id="bio"
             onChange={(e) => setBio(e.target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
           ></textarea>
-          <button type="submit">Add user</button>
+          <button
+            className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
+            type="submit"
+          >
+            Add author
+          </button>
         </form>
       </div>
     </div>

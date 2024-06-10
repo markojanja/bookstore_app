@@ -64,9 +64,10 @@ const CreateBook = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 items-center justify-start pt-3">
+      <h2>Add Book</h2>
       <form
-        className="flex flex-col gap-5 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="flex flex-col gap-5 w-5/6 mx-auto py-2 px-3"
         onSubmit={handleSubmit}
       >
         <input
@@ -77,7 +78,7 @@ const CreateBook = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
           name="description"
           id="description"
           onChange={(e) => setDescription(e.target.value)}
@@ -103,7 +104,7 @@ const CreateBook = () => {
           ))}
         </select>
         <select
-          className="border border-black"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           name="author"
           id="author"
           onChange={(e) => setAuthor(e.target.value)}
@@ -117,7 +118,10 @@ const CreateBook = () => {
             </option>
           ))}
         </select>
-        <button className="border border-black" type="submit">
+        <button
+          className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
+          type="submit"
+        >
           AddBook
         </button>
       </form>
