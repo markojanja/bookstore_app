@@ -10,6 +10,9 @@ const Sidebar = () => {
         <li>
           <Link to={"/authors"}>Authors</Link>
         </li>
+        <li>
+          <Link to={"/genres"}>Genres</Link>
+        </li>
       </ul>
       <hr></hr>
       <ul>
@@ -18,6 +21,9 @@ const Sidebar = () => {
         </li>
         <li>
           <Link to={"/authors/create"}>Add Authors</Link>
+        </li>
+        <li>
+          <Link to={"/"}>Add Genre</Link>
         </li>
       </ul>
     </div>

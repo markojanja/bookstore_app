@@ -7,6 +7,7 @@ import CreateBook from "./pages/CreateBook";
 import Authors from "./pages/Authors";
 import Author from "./pages/Author";
 import CreateAuthor from "./pages/CreateAuthor";
+import Genres from "./pages/Genres";
 
 function App() {
   const router = createBrowserRouter([
@@ -41,6 +42,10 @@ function App() {
         {
           path: "/authors/create",
           element: <CreateAuthor />,
+        },
+        {
+          path: "/genres/",
+          element: <Genres />,
         },
       ],
     },
