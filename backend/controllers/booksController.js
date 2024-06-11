@@ -91,9 +91,22 @@ const getBooksByAuthor = async (req, res, next) => {
   }
 };
 
+const getBooksByGenre = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const books = await Book.find({ genre: id })
+      .populate("author genre")
+      .sort({ createdAt: -1 });
+    res.status(200).json(books);
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   getAllBooks,
   getBooksByAuthor,
+  getBooksByGenre,
   createBook,
   getSingleBook,
   updateBook,
