@@ -23,7 +23,7 @@ const Sidebar = () => {
           <Link to={"/authors/create"}>Add Authors</Link>
         </li>
         <li>
-          <Link to={"/"}>Add Genre</Link>
+          <Link to={"/genres/create"}>Add Genre</Link>
         </li>
       </ul>
     </div>

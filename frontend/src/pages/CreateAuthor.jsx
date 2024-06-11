@@ -8,8 +8,6 @@ const CreateAuthor = () => {
 
   const navigate = useNavigate();
 
-  const url = import.meta.BASE_URL;
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -19,7 +17,7 @@ const CreateAuthor = () => {
     };
 
     try {
-      await fetch(`${url}/authors/create/`, {
+      await fetch(`http://localhost:3000/authors/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
