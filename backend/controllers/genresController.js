@@ -1,4 +1,5 @@
 import Genre from "../models/genre.js";
+import Books from "../models/book.js";
 
 const getGenres = async (req, res, next) => {
   try {
@@ -12,15 +13,17 @@ const getGenres = async (req, res, next) => {
 const getGenre = async (req, res, next) => {
   const { id } = req.params;
   let genre;
+  let books;
 
   try {
     genre = await Genre.findById(id);
+    books = await Books.find({ genre: id }).populate("author");
     if (!genre) {
       const err = new Error("Genre not found");
       err.status = 404;
       return next(err);
     }
-    res.status(200).json({ statusCode: res.statusCode, status: "ok", genre });
+    res.status(200).json({ genre, books });
   } catch (error) {
     next(error);
   }

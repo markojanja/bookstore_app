@@ -12,7 +12,6 @@ const getAuthors = async (req, res, next) => {
 const getAuthor = async (req, res, next) => {
   const { id } = req.params;
   let author;
-
   try {
     author = await Author.findById(id);
     if (!author) {

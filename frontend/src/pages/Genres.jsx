@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Genres = () => {
   const [genres, setGenres] = useState([]);
@@ -22,7 +23,9 @@ const Genres = () => {
     <div>
       <ul>
         {genres.map((genre) => (
-          <li key={genre._id}>{genre.title}</li>
+          <li key={genre._id}>
+            <Link to={genre._id}>{genre.title}</Link>
+          </li>
         ))}
       </ul>
     </div>
