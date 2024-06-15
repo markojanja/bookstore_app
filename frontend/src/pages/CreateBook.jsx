@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BookForm from "../components/BookForm";
 
 const CreateBook = () => {
   const navigate = useNavigate();
@@ -66,65 +67,22 @@ const CreateBook = () => {
   return (
     <div className="flex flex-col gap-3 items-center justify-start pt-3">
       <h2>Add Book</h2>
-      <form
-        className="flex flex-col gap-5 w-5/6 mx-auto py-2 px-3"
-        onSubmit={handleSubmit}
-      >
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="title"
-          id="title"
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
-          name="description"
-          id="description"
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="number"
-          min={0}
-          onChange={(e) => setPages(e.target.value)}
-        />
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="genre"
-          id="genre"
-          onChange={(e) => setGenre(e.target.value)}
-          value={genre}
-        >
-          <option value={""}>select genre</option>
-          {genres.map((genre) => (
-            <option key={genre._id} value={genre._id}>
-              {genre.title}
-            </option>
-          ))}
-        </select>
-        <select
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          name="author"
-          id="author"
-          onChange={(e) => setAuthor(e.target.value)}
-          value={author}
-        >
-          <option value={""}>select author</option>
-
-          {authors.map((author) => (
-            <option key={author._id} value={author._id}>
-              {author.firstName} {author.lastName}
-            </option>
-          ))}
-        </select>
-        <button
-          className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
-          type="submit"
-        >
-          AddBook
-        </button>
-      </form>
+      <BookForm
+        handleSubmit={handleSubmit}
+        setTitle={setTitle}
+        setDescription={setDescription}
+        setPages={setPages}
+        setGenre={setGenre}
+        setAuthor={setAuthor}
+        title={title}
+        description={description}
+        pages={pages}
+        genre={genre}
+        author={author}
+        genres={genres}
+        authors={authors}
+        label={"Add book"}
+      />
     </div>
   );
 };

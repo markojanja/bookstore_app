@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import GenreForm from "../components/GenreForm";
 
 const UpdateGenre = () => {
   const [title, setTitle] = useState("");
@@ -46,24 +47,14 @@ const UpdateGenre = () => {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-col items-center justify-start gap-5">
         <h2>update genre</h2>
-        <form onSubmit={handleFormSubmit}>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            value={title}
-            name="title"
-            id="title"
-            onChange={handleChange}
-          />
-          <button
-            className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
-            type="submit"
-          >
-            save
-          </button>
-        </form>
+        <GenreForm
+          handleChange={handleChange}
+          handleFormSubmit={handleFormSubmit}
+          title={title}
+          label="save"
+        />
       </div>
     </div>
   );
