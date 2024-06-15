@@ -10,7 +10,6 @@ const Genres = () => {
       try {
         const resp = await fetch("http://localhost:3000/genres/");
         const data = await resp.json();
-        console.log(data);
         setGenres(data.data);
       } catch (error) {
         console.error(error);

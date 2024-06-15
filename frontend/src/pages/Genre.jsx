@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Genre = () => {
   const { id } = useParams();
@@ -19,12 +19,11 @@ const Genre = () => {
     };
     fetchGenre();
   }, []);
-  console.log(genre);
-  console.log(books);
 
   return (
     <div>
       <h1>{genre.title}</h1>
+      <Link to={`/genres/update/${genre._id}`}>update</Link>
       <h3>books in genre:</h3>
       {books.length ? (
         <ul>

@@ -49,6 +49,8 @@ const updateGenre = async (req, res, next) => {
     const genre = await Genre.findById(id);
     const { title } = req.body;
 
+    console.log(id, title);
+
     genre.title = title;
 
     await genre.save();

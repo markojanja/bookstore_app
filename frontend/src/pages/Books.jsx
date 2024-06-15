@@ -11,7 +11,7 @@ const Books = () => {
           mode: "cors",
         });
         const data = await resp.json();
-        console.log(data.data);
+        console.log(resp);
         setBooks(data.data);
       } catch (error) {
         console.log(error);
