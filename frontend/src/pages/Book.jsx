@@ -43,20 +43,34 @@ const Book = () => {
     );
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
       {book && (
-        <div>
-          <h2>{book.data.title}</h2>
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-bold">{book.data.title}</h2>
           <p>{book.data.description}</p>
           <p>
-            {book.data.author.firstName} {book.data.author.lastName}
+            Author: {book.data.author.firstName} {book.data.author.lastName}
           </p>
-          <p>{book.data.genre.title}</p>
-          <Link to={"/books"}>back to books</Link>
+          <p>Genre: {book.data.genre.title}</p>
+          <Link to={"/books"} className="text-blue-500 w-max py-2">
+            back to books
+          </Link>
         </div>
       )}
-      <Link to={`/books/update/${id}`}>update</Link>
-      <button onClick={() => setIsVisible(!isVisible)}>delete</button>
+      <div className="flex gap-2">
+        <Link
+          className="bg-emerald-500 text-white px-3 py-2 rounded"
+          to={`/books/update/${id}`}
+        >
+          update
+        </Link>
+        <button
+          className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded"
+          onClick={() => setIsVisible(!isVisible)}
+        >
+          delete
+        </button>
+      </div>
     </div>
   );
 };

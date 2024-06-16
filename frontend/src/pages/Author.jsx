@@ -12,23 +12,26 @@ const Author = () => {
   if (isLoading) return <h1>loading....</h1>;
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
       {author && (
-        <div>
-          <h2>
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-bold">
             {author.data.firstName} {author.data.lastName}
           </h2>
-          <p>{author.data.bio}</p>
+          <p className="text-lg">{author.data.bio}</p>
         </div>
       )}
       <ul>
-        <h3>
-          Books by:{author.data.firstName} {author.data.lastName}
-        </h3>
+        <h3 className="text-xl font-bold">Books :</h3>
         {books &&
           books.data.map((book) => <li key={book._id}>{book.title}</li>)}
       </ul>
-      <Link to={`/authors/update/${id}`}>update</Link>
+      <Link
+        className="bg-emerald-500 text-white px-3 py-2 rounded w-max"
+        to={`/authors/update/${id}`}
+      >
+        update
+      </Link>
     </div>
   );
 };
