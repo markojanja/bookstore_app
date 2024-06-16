@@ -31,7 +31,13 @@ const authors = [
   },
 ];
 
-const genres = [{ title: "Fiction" }, { title: "Fantasy" }, { title: "Science Fiction" }, { title: "Non-Fiction" }, { title: "Mystery" }];
+const genres = [
+  { title: "Fiction" },
+  { title: "Fantasy" },
+  { title: "Science Fiction" },
+  { title: "Non-Fiction" },
+  { title: "Mystery" },
+];
 
 const books = [
   {
@@ -57,14 +63,16 @@ const books = [
   },
   {
     title: "1984",
-    description: "A dystopian social science fiction novel and cautionary tale, written by the English writer George Orwell.",
+    description:
+      "A dystopian social science fiction novel and cautionary tale, written by the English writer George Orwell.",
     pages: 328,
     genre: null, // Will be set later
     author: null, // Will be set later
   },
   {
     title: "War and Peace",
-    description: "A novel by the Russian author Leo Tolstoy, published from 1865 to 1869.",
+    description:
+      "A novel by the Russian author Leo Tolstoy, published from 1865 to 1869.",
     pages: 1225,
     genre: null, // Will be set later
     author: null, // Will be set later

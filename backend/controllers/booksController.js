@@ -74,10 +74,11 @@ const updateBook = async (req, res, next) => {
 };
 
 const deleteBook = async (req, res, next) => {
-  let book;
+  const { id } = req.params;
+
   try {
-    const { id } = req.params;
-    book = await Book.findById(id);
+    console.log(`Attempting to delete book with id: ${id}`);
+    const book = await Book.findById(id);
 
     if (!book) {
       const err = new Error("Book not found");
@@ -85,7 +86,7 @@ const deleteBook = async (req, res, next) => {
       return next(err);
     }
     await book.deleteOne();
-    res.status(202).json({ message: "book deleted..." });
+    res.status(202).json({ message: "Book deleted successfully." });
   } catch (error) {
     next(error);
   }
@@ -96,8 +97,8 @@ const getBooksByAuthor = async (req, res, next) => {
     console.log(id);
     const data = await Book.find({ author: id }).populate("author genre");
     res.status(200).json({ data });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    next(error);
   }
 };
 

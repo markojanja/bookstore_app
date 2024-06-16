@@ -18,6 +18,6 @@ router.get("/author/:id", validateObjectId, getBooksByAuthor);
 router.get("/genre/:id", validateObjectId, getBooksByGenre);
 router.get("/:id", validateObjectId, getSingleBook);
 router.patch("/update/:id", validateObjectId, updateBook);
-router.delete("delete/:id", deleteBook);
+router.delete("/delete/:id", validateObjectId, deleteBook);
 
 export default router;

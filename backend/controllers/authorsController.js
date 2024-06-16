@@ -61,8 +61,8 @@ const updateAuthor = async (req, res, next) => {
 };
 
 const deleteAuthor = async (req, res, next) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const author = await Author.findById(id);
     console.log(author);
     if (!author) {

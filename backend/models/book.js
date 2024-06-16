@@ -17,10 +17,12 @@ const bookSchema = new Schema(
     },
     genre: {
       type: Schema.Types.ObjectId,
+
       ref: "Genre",
     },
     author: {
       type: Schema.Types.ObjectId,
+
       ref: "Author",
     },
   },

@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 
 const Author = () => {
   const { id } = useParams();
+
   const { data: author, isLoading } = useFetch(
     `http://localhost:3000/authors/${id}`
   );
