@@ -1,46 +1,28 @@
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+
+import useFetch from "../hooks/useFetch";
 
 const Book = () => {
   const { id } = useParams();
-  const [book, setBook] = useState(null);
-  const [error, setError] = useState("");
+  const {
+    data: book,
+    isLoading,
+    error,
+  } = useFetch(`http://localhost:3000/books/${id}`);
 
-  useEffect(() => {
-    const getBooks = async () => {
-      try {
-        const resp = await fetch(`http://localhost:3000/books/${id}`, {
-          mode: "cors",
-        });
-        const data = await resp.json();
-
-        if (!resp.ok) {
-          console.log(data.message);
-          setError(data.message);
-          return;
-        }
-
-        console.log(data.data);
-        setBook(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getBooks();
-  }, [id]);
+  if (isLoading) return <h1>loading...</h1>;
+  if (error) return <h1>{error}</h1>;
 
   return (
     <div>
-      {error && <h2>{error}</h2>}
       {book && (
         <div>
-          <h2>{book.title}</h2>
-          <p>{book.description}</p>
+          <h2>{book.data.title}</h2>
+          <p>{book.data.description}</p>
           <p>
-            {book.author.firstName} {book.author.lastName}
+            {book.data.author.firstName} {book.data.author.lastName}
           </p>
-          <p>{book.genre.title}</p>
+          <p>{book.data.genre.title}</p>
           <Link to={"/books"}>back to books</Link>
         </div>
       )}

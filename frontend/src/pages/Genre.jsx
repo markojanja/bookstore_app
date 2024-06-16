@@ -1,38 +1,26 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const Genre = () => {
   const { id } = useParams();
-  const [genre, setGenre] = useState("");
-  const [books, setBooks] = useState([]);
 
-  useEffect(() => {
-    const fetchGenre = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/genres/${id}`);
-        const data = await res.json();
-        setGenre(data.genre);
-        setBooks(data.books);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchGenre();
-  }, []);
+  const { data, isLoading } = useFetch(`http://localhost:3000/genres/${id}`);
+
+  if (isLoading) return <h1>Loading....</h1>;
 
   return (
     <div>
-      <h1>{genre.title}</h1>
-      <Link to={`/genres/update/${genre._id}`}>update</Link>
+      <h1>{data.genre?.title}</h1>
+      <Link to={`/genres/update/${data.genre?._id}`}>update</Link>
       <h3>books in genre:</h3>
-      {books.length ? (
+      {data.books ? (
         <ul>
-          {books.map((book) => (
+          {data.books?.map((book) => (
             <li key={book._id}>{book.title}</li>
           ))}
         </ul>
       ) : (
-        <p>There are no books currently under {genre.title} genre</p>
+        <p>There are no books currently under {data.books?.title} genre</p>
       )}
     </div>
   );

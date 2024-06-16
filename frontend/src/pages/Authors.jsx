@@ -1,28 +1,21 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const Authors = () => {
-  const [authors, setAuthors] = useState([]);
+  const {
+    data: authors,
+    isLoading,
+    error,
+  } = useFetch("http://localhost:3000/authors/");
 
-  useEffect(() => {
-    const fetchAuthors = async () => {
-      try {
-        const resp = await fetch("http://localhost:3000/authors/");
-        const authorsData = await resp.json();
-        setAuthors(authorsData.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchAuthors();
-  }, []);
+  if (isLoading) return <h1>loading...</h1>;
+  if (error) return <h1>error</h1>;
 
   return (
     <div>
       <h2>Authors</h2>
       <ul>
-        {authors.map((author) => (
+        {authors.data.map((author) => (
           <li key={author._id}>
             {`${author.firstName} ${author.lastName}`}{" "}
             <span>

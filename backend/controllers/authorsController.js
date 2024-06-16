@@ -11,15 +11,15 @@ const getAuthors = async (req, res, next) => {
 
 const getAuthor = async (req, res, next) => {
   const { id } = req.params;
-  let author;
+  let data;
   try {
-    author = await Author.findById(id);
-    if (!author) {
+    data = await Author.findById(id);
+    if (!data) {
       const err = new Error("Author not found");
       err.status = 404;
       return next(err);
     }
-    res.status(200).json({ statusCode: res.statusCode, status: "ok", author });
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }

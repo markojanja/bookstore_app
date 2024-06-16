@@ -1,32 +1,22 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const Books = () => {
-  const [books, setBooks] = useState(null);
+  const {
+    data: books,
+    isLoading,
+    error,
+  } = useFetch("http://localhost:3000/books");
 
-  useEffect(() => {
-    const getBooks = async () => {
-      try {
-        const resp = await fetch("http://localhost:3000/books", {
-          mode: "cors",
-        });
-        const data = await resp.json();
-        console.log(resp);
-        setBooks(data.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getBooks();
-  }, []);
+  if (isLoading) return <h1>loading</h1>;
+  if (error) return <h1>{error}</h1>;
 
   return (
     <div>
       <h2>Books</h2>
       {books && (
         <ul>
-          {books.map((book) => (
+          {books.data?.map((book) => (
             <li key={book._id}>
               <Link to={`/books/${book._id}`}>{book.title}</Link>
             </li>

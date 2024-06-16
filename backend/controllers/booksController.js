@@ -3,7 +3,7 @@ import Book from "../models/book.js";
 const getAllBooks = async (req, res, next) => {
   try {
     let data = await Book.find({}).populate("author genre");
-    res.status(200).json({ statusCode: res.statusCode, status: "ok", data });
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }
@@ -23,16 +23,14 @@ const createBook = async (req, res, next) => {
 const getSingleBook = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const book = await Book.findById(id).populate("author genre");
-    if (!book) {
+    const data = await Book.findById(id).populate("author genre");
+    if (!data) {
       const err = new Error("Book not found");
       err.status = 404;
       return next(err);
     }
 
-    res
-      .status(200)
-      .json({ statusCode: res.statusCode, status: "ok", data: book });
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }
@@ -84,8 +82,8 @@ const getBooksByAuthor = async (req, res, next) => {
   try {
     const { id } = req.params;
     console.log(id);
-    const books = await Book.find({ author: id }).populate("author genre");
-    res.status(200).json({ books });
+    const data = await Book.find({ author: id }).populate("author genre");
+    res.status(200).json({ data });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

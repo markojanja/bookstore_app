@@ -1,27 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import useFetch from "../hooks/useFetch";
 const Genres = () => {
-  const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    const fetchGenres = async () => {
-      try {
-        const resp = await fetch("http://localhost:3000/genres/");
-        const data = await resp.json();
-        setGenres(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchGenres();
-  }, []);
+  const { data: genres, isLoading } = useFetch("http://localhost:3000/genres/");
+  if (isLoading) return <h1>loading...</h1>;
   return (
     <div>
       <ul>
-        {genres.map((genre) => (
+        {genres.data.map((genre) => (
           <li key={genre._id}>
             <Link to={genre._id}>{genre.title}</Link>
           </li>
