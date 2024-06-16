@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
 const Author = () => {
@@ -17,7 +17,7 @@ const Author = () => {
           <h2>
             {author.data.firstName} {author.data.lastName}
           </h2>
-          <p>{author.bio}</p>
+          <p>{author.data.bio}</p>
         </div>
       )}
       <ul>
@@ -27,6 +27,7 @@ const Author = () => {
         {books &&
           books.data.map((book) => <li key={book._id}>{book.title}</li>)}
       </ul>
+      <Link to={`/authors/update/${id}`}>update</Link>
     </div>
   );
 };

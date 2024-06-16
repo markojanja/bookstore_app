@@ -66,7 +66,7 @@ const BookForm = ({
         value={author}
       >
         <option value={author ? author._id : ""}>
-          {genre ? `${author.firstName} ${author.lastName}` : "select author"}
+          {author ? `${author.firstName} ${author.lastName}` : "select author"}
         </option>
 
         {authors.map((author) => (

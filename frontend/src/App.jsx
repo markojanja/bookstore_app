@@ -12,6 +12,7 @@ import CreateGenre from "./pages/CreateGenre";
 import Genre from "./pages/Genre";
 import UpdateGenre from "./pages/UpdateGenre";
 import UpdateBook from "./pages/UpdateBook";
+import UpdateAuthor from "./pages/UpdateAuthor";
 
 function App() {
   const router = createBrowserRouter([
@@ -50,6 +51,10 @@ function App() {
         {
           path: "/authors/create",
           element: <CreateAuthor />,
+        },
+        {
+          path: "/authors/update/:id",
+          element: <UpdateAuthor />,
         },
         {
           path: "/genres/",
