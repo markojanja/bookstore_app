@@ -37,28 +37,40 @@ const getSingleBook = async (req, res, next) => {
 };
 
 const updateBook = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { title, description, pages, genre, author } = req.body;
-    const book = Book.findById(id);
+  const { id } = req.params;
 
+  const { title, description, pages, genre, author } = req.body;
+
+  console.log("Update request received:", {
+    id,
+    title,
+    description,
+    pages,
+    genre,
+    author,
+  });
+
+  try {
+    const book = await Book.findById(id);
     if (!book) {
       const err = new Error("Book not found");
       err.status = 404;
       return next(err);
     }
 
-    book.title = title;
-    book.description = description;
-    book.pages = pages;
-    book.author = author;
-    book.genre = genre;
+    console.log("Book before update:", book);
+
+    if (title) book.title = title;
+    if (description) book.description = description;
+    if (pages) book.pages = pages;
+    if (genre) book.genre = genre;
+    if (author) book.author = author;
 
     await book.save();
+    res.status(200).json({ message: "book updated" });
   } catch (error) {
     next(error);
   }
-  res.json({ message: "sample data" });
 };
 
 const deleteBook = async (req, res, next) => {

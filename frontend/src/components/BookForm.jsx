@@ -7,7 +7,7 @@ const BookForm = ({
   setGenre,
   setAuthor,
   title,
-  decsription,
+  description,
   pages,
   genre,
   author,
@@ -32,7 +32,7 @@ const BookForm = ({
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
         name="description"
         id="description"
-        value={decsription}
+        value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
       <input
@@ -49,7 +49,9 @@ const BookForm = ({
         onChange={(e) => setGenre(e.target.value)}
         value={genre}
       >
-        <option value={""}>select genre</option>
+        <option value={genre ? genre._id : ""}>
+          {genre ? genre.title : "select genre"}
+        </option>
         {genres.map((genre) => (
           <option key={genre._id} value={genre._id}>
             {genre.title}
@@ -63,7 +65,9 @@ const BookForm = ({
         onChange={(e) => setAuthor(e.target.value)}
         value={author}
       >
-        <option value={""}>select author</option>
+        <option value={author ? author._id : ""}>
+          {genre ? `${author.firstName} ${author.lastName}` : "select author"}
+        </option>
 
         {authors.map((author) => (
           <option key={author._id} value={author._id}>

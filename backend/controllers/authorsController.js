@@ -53,10 +53,11 @@ const updateAuthor = async (req, res, next) => {
     author.bio = bio;
 
     await author.save();
+
+    res.json({ message: "author updated" });
   } catch (error) {
     next(error);
   }
-  res.json({ message: "author updated" });
 };
 
 const deleteAuthor = async (req, res, next) => {

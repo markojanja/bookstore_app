@@ -11,6 +11,7 @@ import Genres from "./pages/Genres";
 import CreateGenre from "./pages/CreateGenre";
 import Genre from "./pages/Genre";
 import UpdateGenre from "./pages/UpdateGenre";
+import UpdateBook from "./pages/UpdateBook";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ function App() {
         {
           path: "/books/create",
           element: <CreateBook />,
+        },
+        {
+          path: "/books/update/:id",
+          element: <UpdateBook />,
         },
         {
           path: "/authors",

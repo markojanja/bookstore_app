@@ -26,6 +26,7 @@ const Book = () => {
           <Link to={"/books"}>back to books</Link>
         </div>
       )}
+      <Link to={`/books/update/${id}`}>update</Link>
     </div>
   );
 };

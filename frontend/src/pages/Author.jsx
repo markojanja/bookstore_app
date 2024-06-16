@@ -24,9 +24,8 @@ const Author = () => {
         <h3>
           Books by:{author.data.firstName} {author.data.lastName}
         </h3>
-        {books.data?.map((book) => (
-          <li key={book._id}>{book.title}</li>
-        ))}
+        {books &&
+          books.data.map((book) => <li key={book._id}>{book.title}</li>)}
       </ul>
     </div>
   );

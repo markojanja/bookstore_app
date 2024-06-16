@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import useFetch from "../hooks/useFetch";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import GenreForm from "../components/GenreForm";
 
@@ -6,27 +7,17 @@ const UpdateGenre = () => {
   const [title, setTitle] = useState("");
   const { id } = useParams();
   const navigate = useNavigate();
+  const { data, isLoading } = useFetch(`http://localhost:3000/genres/${id}`);
 
   useEffect(() => {
-    const fetchGenre = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/genres/${id}`, {
-          mode: "cors",
-        });
-
-        const data = await res.json();
-
-        setTitle(data.genre.title);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchGenre();
-  }, [id]);
+    if (data) {
+      setTitle(data?.genre.title);
+    }
+  }, [data]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await fetch(`http://localhost:3000/genres/update/${id}`, {
         mode: "cors",
@@ -41,9 +32,11 @@ const UpdateGenre = () => {
       console.log(error);
     }
   };
+
   const handleChange = (e) => {
     setTitle(e.target.value);
   };
+  if (isLoading) return <h1>Loading...</h1>;
 
   return (
     <div>
