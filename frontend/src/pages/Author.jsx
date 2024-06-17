@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Author = () => {
   const { id } = useParams();
@@ -9,7 +10,7 @@ const Author = () => {
   );
   const { data: books } = useFetch(`http://localhost:3000/books/author/${id}`);
 
-  if (isLoading) return <h1>loading....</h1>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">

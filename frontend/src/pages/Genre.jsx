@@ -1,12 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Genre = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useFetch(`http://localhost:3000/genres/${id}`);
 
-  if (isLoading) return <h1>Loading....</h1>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">

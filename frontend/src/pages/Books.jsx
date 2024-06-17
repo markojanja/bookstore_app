@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Books = () => {
   const {
@@ -8,7 +9,7 @@ const Books = () => {
     error,
   } = useFetch("http://localhost:3000/books");
 
-  if (isLoading) return <h1>loading</h1>;
+  if (isLoading) return <LoadingScreen />;
   if (error) return <h1>{error}</h1>;
 
   return (

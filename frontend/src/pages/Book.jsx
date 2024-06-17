@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import Modal from "../components/Modal";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Book = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +31,7 @@ const Book = () => {
     }
   };
 
-  if (isLoading) return <h1>loading...</h1>;
+  if (isLoading) return <LoadingScreen />;
   if (error) return <h1>{error}</h1>;
   if (isVisible)
     return (

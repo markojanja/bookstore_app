@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import CountCard from "../components/CountCard";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -23,11 +24,7 @@ const Home = () => {
 
   return (
     <div className="relative">
-      {loading && (
-        <h2 className="absolute flex items-center justify-center  inset-0 text-3xl bg-slate-50 z-50">
-          loading
-        </h2>
-      )}
+      {loading && <LoadingScreen />}
       {data && (
         <section className="flex flex-col flex-1 ">
           <div className="flex items-center justify-center p-5 w-4/5 mx-auto">
