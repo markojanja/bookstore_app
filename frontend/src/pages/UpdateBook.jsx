@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import BookForm from "../components/BookForm";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -63,7 +64,7 @@ const UpdateBook = () => {
     }
   };
 
-  if (isLoading) return <h1>loading...</h1>;
+  if (isLoading) return <LoadingScreen />;
   return (
     <div className="flex flex-col items-center justify-start gap-5">
       <h2 className="text-2xl">Update Book</h2>

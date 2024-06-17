@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import AuthorForm from "../components/AuthorForm";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingScreen from "../components/LoadingScreen";
 
 const UpdateAuthor = () => {
   const { id } = useParams();
@@ -45,7 +46,7 @@ const UpdateAuthor = () => {
       console.log(error);
     }
   };
-  if (isLoading) return <h1>loading...</h1>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className="flex flex-col items-center justify-start gap-5">

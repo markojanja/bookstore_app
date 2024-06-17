@@ -2,6 +2,7 @@ import useFetch from "../hooks/useFetch";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import GenreForm from "../components/GenreForm";
+import LoadingScreen from "../components/LoadingScreen";
 
 const UpdateGenre = () => {
   const [title, setTitle] = useState("");
@@ -36,7 +37,7 @@ const UpdateGenre = () => {
   const handleChange = (e) => {
     setTitle(e.target.value);
   };
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div>
