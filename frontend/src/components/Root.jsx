@@ -7,7 +7,7 @@ const Root = () => {
   return (
     <>
       <Navbar />
-      <main className="relative grid grid-cols-[10%_minmax(90%,_1fr)] flex-1">
+      <main className="relative grid grid-cols-[15%_minmax(85%,_1fr)] flex-1">
         <Sidebar />
         <Outlet />
       </main>

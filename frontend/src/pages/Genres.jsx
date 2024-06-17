@@ -8,7 +8,10 @@ const Genres = () => {
       <h2 className="text-2xl font-semibold">Genres</h2>
       <ul className="flex flex-col gap-2 w-2/3">
         {genres.data.map((genre) => (
-          <li key={genre._id} className="py-3 px-2 bg-slate-300">
+          <li
+            key={genre._id}
+            className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+          >
             <Link to={genre._id}>{genre.title}</Link>
           </li>
         ))}

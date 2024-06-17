@@ -16,10 +16,7 @@ const BookForm = ({
   label,
 }) => {
   return (
-    <form
-      className="flex flex-col gap-5 w-5/6 mx-auto py-2 px-3"
-      onSubmit={handleSubmit}
-    >
+    <form className="flex flex-col gap-3 w-4/6 mx-auto" onSubmit={handleSubmit}>
       <input
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="text"

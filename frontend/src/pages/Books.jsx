@@ -17,7 +17,10 @@ const Books = () => {
       {books && (
         <ul className="flex flex-col gap-2 w-2/3">
           {books.data?.map((book) => (
-            <li key={book._id} className="py-3 px-2 bg-slate-300">
+            <li
+              key={book._id}
+              className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+            >
               <Link to={`/books/${book._id}`}>{book.title}</Link>
             </li>
           ))}

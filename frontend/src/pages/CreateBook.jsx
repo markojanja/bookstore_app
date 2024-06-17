@@ -66,7 +66,7 @@ const CreateBook = () => {
 
   return (
     <div className="flex flex-col gap-3 items-center justify-start pt-3">
-      <h2>Add Book</h2>
+      <h2 className="text-2xl">Add Book</h2>
       <BookForm
         handleSubmit={handleSubmit}
         setTitle={setTitle}

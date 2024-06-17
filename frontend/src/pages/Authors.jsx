@@ -16,7 +16,10 @@ const Authors = () => {
       <h2 className="text-2xl font-semibold">Authors</h2>
       <ul className="flex flex-col gap-2 w-2/3">
         {authors.data.map((author) => (
-          <li key={author._id} className="bg-slate-300 py-3 px-2">
+          <li
+            key={author._id}
+            className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+          >
             <Link to={`/authors/${author._id}`}>
               {`${author.firstName} ${author.lastName}`}
             </Link>

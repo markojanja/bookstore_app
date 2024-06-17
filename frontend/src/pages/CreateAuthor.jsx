@@ -35,7 +35,7 @@ const CreateAuthor = () => {
   return (
     <div>
       <div className="flex flex-col items-center justify-center gap-5">
-        <h2>Add Author</h2>
+        <h2 className="text-2xl">Add Author</h2>
         <AuthorForm
           handleFormSubmit={handleFormSubmit}
           setFirstName={setFirstName}

@@ -47,11 +47,11 @@ const Book = () => {
       {book && (
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold">{book.data.title}</h2>
-          <p>{book.data.description}</p>
-          <p>
+          <p className="text-lg">{book.data.description}</p>
+          <p className="text-lg">
             Author: {book.data.author.firstName} {book.data.author.lastName}
           </p>
-          <p>Genre: {book.data.genre.title}</p>
+          <p className="text-lg">Genre: {book.data.genre.title}</p>
           <Link to={"/books"} className="text-blue-500 w-max py-2">
             back to books
           </Link>

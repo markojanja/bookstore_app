@@ -24,7 +24,11 @@ const Author = () => {
       <ul>
         <h3 className="text-xl font-bold">Books :</h3>
         {books &&
-          books.data.map((book) => <li key={book._id}>{book.title}</li>)}
+          books.data.map((book) => (
+            <li className="text-lg" key={book._id}>
+              {book.title}
+            </li>
+          ))}
       </ul>
       <Link
         className="bg-emerald-500 text-white px-3 py-2 rounded w-max"

@@ -40,8 +40,8 @@ const UpdateGenre = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-start gap-5">
-        <h2>update genre</h2>
+      <div className="flex flex-col items-center justify-center gap-5">
+        <h2 className="text-2xl">update genre</h2>
         <GenreForm
           handleChange={handleChange}
           handleFormSubmit={handleFormSubmit}

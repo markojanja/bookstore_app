@@ -48,8 +48,8 @@ const UpdateAuthor = () => {
   if (isLoading) return <h1>loading...</h1>;
 
   return (
-    <div>
-      <h2>Update author</h2>
+    <div className="flex flex-col items-center justify-start gap-5">
+      <h2 className="text-2xl">Update author</h2>
       <AuthorForm
         handleFormSubmit={handleFormSubmit}
         setFirstName={setFirstName}

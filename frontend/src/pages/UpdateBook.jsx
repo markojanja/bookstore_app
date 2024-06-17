@@ -65,8 +65,8 @@ const UpdateBook = () => {
 
   if (isLoading) return <h1>loading...</h1>;
   return (
-    <div>
-      <h2>Update Book</h2>
+    <div className="flex flex-col items-center justify-start gap-5">
+      <h2 className="text-2xl">Update Book</h2>
       <BookForm
         handleSubmit={handleSubmit}
         setTitle={setTitle}

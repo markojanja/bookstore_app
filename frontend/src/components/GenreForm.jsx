@@ -2,7 +2,7 @@
 const GenreForm = ({ handleFormSubmit, title, handleChange, label }) => {
   return (
     <form
-      className="flex flex-col gap-3 w-[80%] mx-auto"
+      className="flex flex-col gap-3 w-4/6 mx-auto"
       onSubmit={handleFormSubmit}
     >
       <input
