@@ -25,7 +25,7 @@ const CreateGenre = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-start gap-5">
+    <div className="flex flex-col gap-3 items-center justify-start pt-3">
       <h2 className="text-2xl">Add genre</h2>
       <GenreForm
         handleFormSubmit={handleFormSubmit}
