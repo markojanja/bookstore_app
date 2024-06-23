@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const GenreForm = ({ handleFormSubmit, title, handleChange, err, label }) => {
   return (
     <form

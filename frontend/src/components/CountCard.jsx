@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const CountCard = ({ data, label }) => {
   return (
     <div className="flex flex-col items-center justify-center py-2 h-52 gap-2">

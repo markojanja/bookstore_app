@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const Modal = ({ handleDelete, title, toggleModal }) => {
   return (
     <div className="absolute inset-0 z-50 bg-slate-50/5 backdrop-blur-md flex flex-col items-center justify-start">
