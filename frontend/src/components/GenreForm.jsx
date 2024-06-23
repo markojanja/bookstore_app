@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const GenreForm = ({ handleFormSubmit, title, handleChange, label }) => {
+const GenreForm = ({ handleFormSubmit, title, handleChange, err, label }) => {
   return (
     <form
       className="flex flex-col gap-3 w-4/6 mx-auto"
@@ -20,6 +20,11 @@ const GenreForm = ({ handleFormSubmit, title, handleChange, label }) => {
       >
         {label}
       </button>
+      {err && (
+        <div className="flex items-center justify-center bg-red-300 text-red-700 p-4 rounded border border-red-700">
+          {err}
+        </div>
+      )}
     </form>
   );
 };

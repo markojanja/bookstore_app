@@ -1,11 +1,27 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import LoadingScreen from "../components/LoadingScreen";
+import Modal from "../components/Modal";
+import { useModal } from "../hooks/useModal";
+import { useDelete } from "../hooks/useDelete";
 
 const Genre = () => {
   const { id } = useParams();
-
   const { data, isLoading } = useFetch(`http://localhost:3000/genres/${id}`);
+  const { isVisible, toggleModal } = useModal();
+  const { error, deleteItem } = useDelete();
+
+  const handleDelete = async () => {
+    await deleteItem(`http://localhost:3000/genres/delete/${id}`);
+  };
+  if (isVisible)
+    return (
+      <Modal
+        handleDelete={handleDelete}
+        toggleModal={toggleModal}
+        title={data.genre.title}
+      />
+    );
 
   if (isLoading) return <LoadingScreen />;
 
@@ -13,9 +29,9 @@ const Genre = () => {
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
       <h2 className="text-2xl font-bold">{data.genre?.title}</h2>
 
-      <h3 className="text-xl font-bold">Books in genre:</h3>
-      {data.books ? (
+      {data.books.length ? (
         <ul>
+          <h3 className="text-xl font-bold">Books in genre:</h3>
           {data.books?.map((book) => (
             <li className="text-lg" key={book._id}>
               {book.title}
@@ -24,16 +40,27 @@ const Genre = () => {
         </ul>
       ) : (
         <p className="text-lg">
-          There are no books currently under {data.books?.title} genre
+          There are no books currently under {data.genre?.title} genre
         </p>
       )}
 
-      <Link
-        className="bg-emerald-500 text-white px-3 py-2 rounded w-max"
-        to={`/genres/update/${data.genre?._id}`}
-      >
-        Update
-      </Link>
+      <div className="flex gap-2">
+        <Link
+          className="bg-emerald-500 text-white px-3 py-2 rounded w-max"
+          to={`/genres/update/${data.genre?._id}`}
+        >
+          Update
+        </Link>
+        {!data.books.length && (
+          <button
+            className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded"
+            onClick={toggleModal}
+          >
+            delete
+          </button>
+        )}
+      </div>
+      {error && <p>{error}</p>}
     </div>
   );
 };

@@ -1,34 +1,21 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { useState } from "react";
+import { useDelete } from "../hooks/useDelete";
 import Modal from "../components/Modal";
 import LoadingScreen from "../components/LoadingScreen";
+import { useModal } from "../hooks/useModal";
 
 const Book = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const { id } = useParams();
-  const navigate = useNavigate();
-  const {
-    data: book,
-    isLoading,
-    error,
-  } = useFetch(`http://localhost:3000/books/${id}`);
+  const { isVisible, toggleModal } = useModal();
+  const { error, deleteItem } = useDelete();
+  const { data: book, isLoading } = useFetch(
+    `http://localhost:3000/books/${id}`
+  );
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    try {
-      await fetch(`http://localhost:3000/books/delete/${id}`, {
-        method: "DELETE",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      navigate("/books");
-    } catch (error) {
-      console.log(error);
-    }
+    await deleteItem(`http://localhost:3000/books/delete/${id}`);
   };
 
   if (isLoading) return <LoadingScreen />;
@@ -37,9 +24,8 @@ const Book = () => {
     return (
       <Modal
         handleDelete={handleDelete}
-        id={id}
         title={book.data.title}
-        setIsVisible={setIsVisible}
+        toggleModal={toggleModal}
       />
     );
 
@@ -67,7 +53,7 @@ const Book = () => {
         </Link>
         <button
           className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded"
-          onClick={() => setIsVisible(!isVisible)}
+          onClick={toggleModal}
         >
           delete
         </button>

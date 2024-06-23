@@ -35,6 +35,11 @@ const createGenre = async (req, res, next) => {
     const newGenre = {
       title,
     };
+    if (!newGenre.title) {
+      const err = new Error("title is required");
+      err.status = 400;
+      return next(err);
+    }
 
     await Genre.create(newGenre);
     res.status(201).json({ message: "genre created" });

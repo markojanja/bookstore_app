@@ -5,6 +5,7 @@ import GenreForm from "../components/GenreForm";
 const CreateGenre = () => {
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
+  const [err, setError] = useState();
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -12,15 +13,22 @@ const CreateGenre = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`http://localhost:3000/genres/create`, {
+      const resp = await fetch(`http://localhost:3000/genres/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ title }),
       });
-      navigate("/genres");
+
+      const json = await resp.json();
+      if (!resp.ok) {
+        setError(json.message);
+      } else {
+        navigate("/genres");
+      }
     } catch (error) {
+      setError("Whoops something went wrong");
       console.log(error);
     }
   };
@@ -32,6 +40,7 @@ const CreateGenre = () => {
         title={title}
         handleChange={handleChange}
         label="Add genre"
+        err={err}
       />
     </div>
   );
