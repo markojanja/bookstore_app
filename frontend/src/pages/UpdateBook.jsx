@@ -1,25 +1,23 @@
-import { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
-import BookForm from "../components/BookForm";
-import { useNavigate, useParams } from "react-router-dom";
-import LoadingScreen from "../components/LoadingScreen";
+import { useState, useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
+import BookForm from '../components/BookForm';
+import { useNavigate, useParams } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 
 const UpdateBook = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: book, isLoading } = useFetch(
-    `http://localhost:3000/books/${id}`
-  );
+  const { data: book, isLoading } = useFetch(`http://localhost:3000/books/${id}`);
 
   const { data: authorsData } = useFetch(`http://localhost:3000/authors/`);
 
   const { data: genresData } = useFetch(`http://localhost:3000/genres/`);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [pages, setPages] = useState("");
-  const [genre, setGenre] = useState("");
-  const [author, setAuthor] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [pages, setPages] = useState('');
+  const [genre, setGenre] = useState('');
+  const [author, setAuthor] = useState('');
   const [authors, setAuthors] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -51,16 +49,16 @@ const UpdateBook = () => {
 
     try {
       await fetch(`http://localhost:3000/books/update/${id}`, {
-        mode: "cors",
-        method: "PATCH",
+        mode: 'cors',
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedBook),
       });
-      navigate("/books");
+      navigate('/books');
     } catch (error) {
-      console.error("Failed to update book:", error);
+      console.error('Failed to update book:', error);
     }
   };
 
@@ -82,7 +80,7 @@ const UpdateBook = () => {
         author={author}
         genres={genres}
         authors={authors}
-        label={"Save"}
+        label={'Save'}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { ImSpinner6 } from "react-icons/im";
+import { ImSpinner6 } from 'react-icons/im';
 
 const LoadingScreen = () => {
   return (

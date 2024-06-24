@@ -1,23 +1,23 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./components/Root";
-import Home from "./pages/Home";
-import Books from "./pages/Books";
-import Book from "./pages/Book";
-import CreateBook from "./pages/CreateBook";
-import Authors from "./pages/Authors";
-import Author from "./pages/Author";
-import CreateAuthor from "./pages/CreateAuthor";
-import Genres from "./pages/Genres";
-import CreateGenre from "./pages/CreateGenre";
-import Genre from "./pages/Genre";
-import UpdateGenre from "./pages/UpdateGenre";
-import UpdateBook from "./pages/UpdateBook";
-import UpdateAuthor from "./pages/UpdateAuthor";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './components/Root';
+import Home from './pages/Home';
+import Books from './pages/Books';
+import Book from './pages/Book';
+import CreateBook from './pages/CreateBook';
+import Authors from './pages/Authors';
+import Author from './pages/Author';
+import CreateAuthor from './pages/CreateAuthor';
+import Genres from './pages/Genres';
+import CreateGenre from './pages/CreateGenre';
+import Genre from './pages/Genre';
+import UpdateGenre from './pages/UpdateGenre';
+import UpdateBook from './pages/UpdateBook';
+import UpdateAuthor from './pages/UpdateAuthor';
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: '/',
       element: <Root />,
       children: [
         {
@@ -25,51 +25,51 @@ function App() {
           element: <Home />,
         },
         {
-          path: "/books",
+          path: '/books',
           element: <Books />,
         },
         {
-          path: "/books/:id",
+          path: '/books/:id',
           element: <Book />,
         },
         {
-          path: "/books/create",
+          path: '/books/create',
           element: <CreateBook />,
         },
         {
-          path: "/books/update/:id",
+          path: '/books/update/:id',
           element: <UpdateBook />,
         },
         {
-          path: "/authors",
+          path: '/authors',
           element: <Authors />,
         },
         {
-          path: "/authors/:id",
+          path: '/authors/:id',
           element: <Author />,
         },
         {
-          path: "/authors/create",
+          path: '/authors/create',
           element: <CreateAuthor />,
         },
         {
-          path: "/authors/update/:id",
+          path: '/authors/update/:id',
           element: <UpdateAuthor />,
         },
         {
-          path: "/genres/",
+          path: '/genres/',
           element: <Genres />,
         },
         {
-          path: "/genres/:id",
+          path: '/genres/:id',
           element: <Genre />,
         },
         {
-          path: "/genres/create",
+          path: '/genres/create',
           element: <CreateGenre />,
         },
         {
-          path: "/genres/update/:id",
+          path: '/genres/update/:id',
           element: <UpdateGenre />,
         },
       ],

@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
-import AuthorForm from "../components/AuthorForm";
-import { useNavigate, useParams } from "react-router-dom";
-import LoadingScreen from "../components/LoadingScreen";
+import { useState, useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
+import AuthorForm from '../components/AuthorForm';
+import { useNavigate, useParams } from 'react-router-dom';
+import LoadingScreen from '../components/LoadingScreen';
 
 const UpdateAuthor = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: author, isLoading } = useFetch(
-    `http://localhost:3000/authors/${id}`
-  );
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
+  const { data: author, isLoading } = useFetch(`http://localhost:3000/authors/${id}`);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [bio, setBio] = useState('');
 
   useEffect(() => {
     if (author) {
@@ -34,10 +32,10 @@ const UpdateAuthor = () => {
 
     try {
       await fetch(`http://localhost:3000/authors/update/${id}`, {
-        mode: "cors",
-        method: "PATCH",
+        mode: 'cors',
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedData),
       });
@@ -56,7 +54,7 @@ const UpdateAuthor = () => {
         setFirstName={setFirstName}
         setLastName={setLastName}
         setBio={setBio}
-        label={"save"}
+        label={'save'}
         firstName={firstName}
         lastName={lastName}
         bio={bio}

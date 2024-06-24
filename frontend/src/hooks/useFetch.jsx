@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
@@ -9,7 +9,7 @@ const useFetch = (url) => {
     const fetchData = async (url) => {
       setIsLoading(true);
       try {
-        const res = await fetch(url, { mode: "cors" });
+        const res = await fetch(url, { mode: 'cors' });
         const json = await res.json();
         setData(json);
       } catch (error) {

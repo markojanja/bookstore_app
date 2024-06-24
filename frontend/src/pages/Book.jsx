@@ -1,17 +1,15 @@
-import { Link, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import { useDelete } from "../hooks/useDelete";
-import Modal from "../components/Modal";
-import LoadingScreen from "../components/LoadingScreen";
-import { useModal } from "../hooks/useModal";
+import { Link, useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+import { useDelete } from '../hooks/useDelete';
+import Modal from '../components/Modal';
+import LoadingScreen from '../components/LoadingScreen';
+import { useModal } from '../hooks/useModal';
 
 const Book = () => {
   const { id } = useParams();
   const { isVisible, toggleModal } = useModal();
   const { error, deleteItem } = useDelete();
-  const { data: book, isLoading } = useFetch(
-    `http://localhost:3000/books/${id}`
-  );
+  const { data: book, isLoading } = useFetch(`http://localhost:3000/books/${id}`);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -20,14 +18,7 @@ const Book = () => {
 
   if (isLoading) return <LoadingScreen />;
   if (error) return <h1>{error}</h1>;
-  if (isVisible)
-    return (
-      <Modal
-        handleDelete={handleDelete}
-        title={book.data.title}
-        toggleModal={toggleModal}
-      />
-    );
+  if (isVisible) return <Modal handleDelete={handleDelete} title={book.data.title} toggleModal={toggleModal} />;
 
   return (
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
@@ -37,38 +28,26 @@ const Book = () => {
           <p className="text-lg">{book.data.description}</p>
           <p className="text-lg">
             Author:
-            <Link
-              className="text-blue-500 pl-2"
-              to={`/authors/${book.data.author._id}`}
-            >
+            <Link className="text-blue-500 pl-2" to={`/authors/${book.data.author._id}`}>
               {book.data.author.firstName} {book.data.author.lastName}
             </Link>
           </p>
           <p className="text-lg">
             Genre:
-            <Link
-              className="text-blue-500 pl-2"
-              to={`/genres/${book.data.genre._id}`}
-            >
+            <Link className="text-blue-500 pl-2" to={`/genres/${book.data.genre._id}`}>
               {book.data.genre.title}
             </Link>
           </p>
-          <Link to={"/books"} className="text-blue-500 w-max py-2">
+          <Link to={'/books'} className="text-blue-500 w-max py-2">
             back to books
           </Link>
         </div>
       )}
       <div className="flex gap-2">
-        <Link
-          className="bg-emerald-500 text-white px-3 py-2 rounded"
-          to={`/books/update/${id}`}
-        >
+        <Link className="bg-emerald-500 text-white px-3 py-2 rounded" to={`/books/update/${id}`}>
           update
         </Link>
-        <button
-          className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded"
-          onClick={toggleModal}
-        >
+        <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
           delete
         </button>
       </div>

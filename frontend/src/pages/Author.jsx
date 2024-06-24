@@ -1,9 +1,9 @@
-import { Link, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import LoadingScreen from "../components/LoadingScreen";
-import { useModal } from "../hooks/useModal";
-import { useDelete } from "../hooks/useDelete";
-import Modal from "../components/Modal";
+import { Link, useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+import LoadingScreen from '../components/LoadingScreen';
+import { useModal } from '../hooks/useModal';
+import { useDelete } from '../hooks/useDelete';
+import Modal from '../components/Modal';
 
 const Author = () => {
   const { id } = useParams();
@@ -11,9 +11,7 @@ const Author = () => {
   const { deleteItem } = useDelete();
 
   const { data: author } = useFetch(`http://localhost:3000/authors/${id}`);
-  const { data: books, isLoading } = useFetch(
-    `http://localhost:3000/books/author/${id}`
-  );
+  const { data: books, isLoading } = useFetch(`http://localhost:3000/books/author/${id}`);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -49,31 +47,19 @@ const Author = () => {
 
         {books &&
           books.data.map((book) => (
-            <li
-              className="bg-emerald-400 text-lg w-full rounded p-3"
-              key={book._id}
-            >
-              <Link
-                to={`/books/${book._id}`}
-                className="text-lg text-gray-800 font-semibold flex"
-              >
+            <li className="bg-emerald-400 text-lg w-full rounded p-3" key={book._id}>
+              <Link to={`/books/${book._id}`} className="text-lg text-gray-800 font-semibold flex">
                 {book.title}
               </Link>
             </li>
           ))}
       </ul>
       <div className="flex gap-2">
-        <Link
-          className="bg-emerald-500 text-white px-3 py-2 rounded w-max"
-          to={`/authors/update/${id}`}
-        >
+        <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
           update
         </Link>
         {books && !books.data.length && (
-          <button
-            className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded"
-            onClick={toggleModal}
-          >
+          <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
             delete
           </button>
         )}

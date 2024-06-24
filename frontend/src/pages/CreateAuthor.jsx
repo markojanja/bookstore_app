@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AuthorForm from "../components/AuthorForm";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthorForm from '../components/AuthorForm';
 
 const CreateAuthor = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [bio, setBio] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [bio, setBio] = useState('');
 
   const navigate = useNavigate();
 
@@ -19,14 +19,14 @@ const CreateAuthor = () => {
 
     try {
       await fetch(`http://localhost:3000/authors/create/`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
 
-      navigate("/authors");
+      navigate('/authors');
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +43,7 @@ const CreateAuthor = () => {
         firstName={firstName}
         lastName={lastName}
         bio={bio}
-        label={"add author"}
+        label={'add author'}
       />
     </div>
   );

@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import GenreForm from "../components/GenreForm";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import GenreForm from '../components/GenreForm';
 
 const CreateGenre = () => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const navigate = useNavigate();
   const [err, setError] = useState();
 
@@ -14,9 +14,9 @@ const CreateGenre = () => {
     e.preventDefault();
     try {
       const resp = await fetch(`http://localhost:3000/genres/create`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title }),
       });
@@ -25,10 +25,10 @@ const CreateGenre = () => {
       if (!resp.ok) {
         setError(json.message);
       } else {
-        navigate("/genres");
+        navigate('/genres');
       }
     } catch (error) {
-      setError("Whoops something went wrong");
+      setError('Whoops something went wrong');
       console.log(error);
     }
   };

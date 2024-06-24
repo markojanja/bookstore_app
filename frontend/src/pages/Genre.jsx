@@ -1,9 +1,9 @@
-import { Link, useParams } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
-import LoadingScreen from "../components/LoadingScreen";
-import Modal from "../components/Modal";
-import { useModal } from "../hooks/useModal";
-import { useDelete } from "../hooks/useDelete";
+import { Link, useParams } from 'react-router-dom';
+import useFetch from '../hooks/useFetch';
+import LoadingScreen from '../components/LoadingScreen';
+import Modal from '../components/Modal';
+import { useModal } from '../hooks/useModal';
+import { useDelete } from '../hooks/useDelete';
 
 const Genre = () => {
   const { id } = useParams();

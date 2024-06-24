@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const useDelete = () => {
   const [error, setError] = useState(null);
@@ -8,10 +8,10 @@ export const useDelete = () => {
   const deleteItem = async (url) => {
     try {
       const response = await fetch(url, {
-        method: "DELETE",
-        mode: "cors",
+        method: 'DELETE',
+        mode: 'cors',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const json = await response.json();
@@ -21,7 +21,7 @@ export const useDelete = () => {
         setError(json.message);
       }
     } catch (error) {
-      setError("Whoops something went wrong");
+      setError('Whoops something went wrong');
       console.log(error);
     }
   };

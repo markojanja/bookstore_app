@@ -45,9 +45,7 @@ const BookForm = ({
         onChange={(e) => setGenre(e.target.value)}
         value={genre}
       >
-        <option value={genre ? genre._id : ""}>
-          {genre ? genre.title : "select genre"}
-        </option>
+        <option value={genre ? genre._id : ''}>{genre ? genre.title : 'select genre'}</option>
         {genres.map((genre) => (
           <option key={genre._id} value={genre._id}>
             {genre.title}
@@ -61,8 +59,8 @@ const BookForm = ({
         onChange={(e) => setAuthor(e.target.value)}
         value={author}
       >
-        <option value={author ? author._id : ""}>
-          {author ? `${author.firstName} ${author.lastName}` : "select author"}
+        <option value={author ? author._id : ''}>
+          {author ? `${author.firstName} ${author.lastName}` : 'select author'}
         </option>
 
         {authors.map((author) => (
@@ -71,10 +69,7 @@ const BookForm = ({
           </option>
         ))}
       </select>
-      <button
-        className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
-        type="submit"
-      >
+      <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">
         {label}
       </button>
     </form>
