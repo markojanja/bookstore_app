@@ -36,9 +36,23 @@ const Book = () => {
           <h2 className="text-2xl font-bold">{book.data.title}</h2>
           <p className="text-lg">{book.data.description}</p>
           <p className="text-lg">
-            Author: {book.data.author.firstName} {book.data.author.lastName}
+            Author:
+            <Link
+              className="text-blue-500 pl-2"
+              to={`/authors/${book.data.author._id}`}
+            >
+              {book.data.author.firstName} {book.data.author.lastName}
+            </Link>
           </p>
-          <p className="text-lg">Genre: {book.data.genre.title}</p>
+          <p className="text-lg">
+            Genre:
+            <Link
+              className="text-blue-500 pl-2"
+              to={`/genres/${book.data.genre._id}`}
+            >
+              {book.data.genre.title}
+            </Link>
+          </p>
           <Link to={"/books"} className="text-blue-500 w-max py-2">
             back to books
           </Link>

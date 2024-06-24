@@ -20,9 +20,14 @@ const Books = () => {
           {books.data?.map((book) => (
             <li
               key={book._id}
-              className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+              className="bg-emerald-400 text-lg w-full rounded p-3"
             >
-              <Link to={`/books/${book._id}`}>{book.title}</Link>
+              <Link
+                className="text-lg text-gray-800 font-semibold flex"
+                to={`/books/${book._id}`}
+              >
+                {book.title}
+              </Link>
             </li>
           ))}
         </ul>

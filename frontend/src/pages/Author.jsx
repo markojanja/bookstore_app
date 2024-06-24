@@ -31,7 +31,7 @@ const Author = () => {
     );
 
   return (
-    <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
+    <div className="flex flex-col gap-4 w-4/6 mx-auto mt-5">
       {author && (
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold">
@@ -40,7 +40,7 @@ const Author = () => {
           <p className="text-lg">{author.data.bio}</p>
         </div>
       )}
-      <ul>
+      <ul className="flex flex-col gap-2">
         {books && books.data.length ? (
           <h3 className="text-xl font-bold">Books :</h3>
         ) : (
@@ -49,8 +49,16 @@ const Author = () => {
 
         {books &&
           books.data.map((book) => (
-            <li className="text-lg" key={book._id}>
-              {book.title}
+            <li
+              className="bg-emerald-400 text-lg w-full rounded p-3"
+              key={book._id}
+            >
+              <Link
+                to={`/books/${book._id}`}
+                className="text-lg text-gray-800 font-semibold flex"
+              >
+                {book.title}
+              </Link>
             </li>
           ))}
       </ul>

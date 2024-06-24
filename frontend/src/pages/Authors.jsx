@@ -19,9 +19,12 @@ const Authors = () => {
         {authors.data.map((author) => (
           <li
             key={author._id}
-            className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+            className="bg-emerald-400 text-lg w-full rounded p-3"
           >
-            <Link to={`/authors/${author._id}`}>
+            <Link
+              className="text-lg text-gray-800 font-semibold flex"
+              to={`/authors/${author._id}`}
+            >
               {`${author.firstName} ${author.lastName}`}
             </Link>
           </li>

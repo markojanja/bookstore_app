@@ -9,7 +9,6 @@ const CreateBook = () => {
   const [pages, setPages] = useState("");
   const [genre, setGenre] = useState("");
   const [author, setAuthor] = useState("");
-
   const [genres, setGenres] = useState([]);
   const [authors, setAuthors] = useState([]);
 

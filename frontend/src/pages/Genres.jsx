@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import LoadingScreen from "../components/LoadingScreen";
+
 const Genres = () => {
   const { data: genres, isLoading } = useFetch("http://localhost:3000/genres/");
   if (isLoading) return <LoadingScreen />;
@@ -11,9 +12,14 @@ const Genres = () => {
         {genres.data.map((genre) => (
           <li
             key={genre._id}
-            className="bg-emerald-400 p-3 text-lg rounded text-gray-800"
+            className="bg-emerald-400 text-lg w-full rounded p-3"
           >
-            <Link to={genre._id}>{genre.title}</Link>
+            <Link
+              className="text-lg text-gray-800 font-semibold flex"
+              to={genre._id}
+            >
+              {genre.title}
+            </Link>
           </li>
         ))}
       </ul>
