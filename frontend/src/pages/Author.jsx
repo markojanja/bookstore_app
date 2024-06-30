@@ -56,7 +56,7 @@ const Author = () => {
         <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
           update
         </Link>
-        {hasBooks && (
+        {!hasBooks && (
           <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
             delete
           </button>

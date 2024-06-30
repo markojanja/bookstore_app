@@ -5,6 +5,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
         type="text"
         name="firstName"
         id="firstName"
+        placeholder="first name"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -13,6 +14,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
         type="text"
         name="lastName"
         id="lastName"
+        placeholder="last name"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -21,6 +23,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
       <textarea
         name="bio"
         id="bio"
+        placeholder="authors bio"
         value={bio}
         onChange={(e) => setBio(e.target.value)}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
