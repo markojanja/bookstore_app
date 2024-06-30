@@ -23,7 +23,7 @@ const Book = () => {
   return (
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
       {book && (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 w-5/6 mx-auto">
           <h2 className="text-2xl font-bold">{book.data.title}</h2>
           <p className="text-lg">{book.data.description}</p>
           <p className="text-lg">
@@ -43,7 +43,7 @@ const Book = () => {
           </Link>
         </div>
       )}
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-5/6 mx-auto">
         <Link className="bg-emerald-500 text-white px-3 py-2 rounded" to={`/books/update/${id}`}>
           update
         </Link>

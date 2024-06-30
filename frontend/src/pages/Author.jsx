@@ -1,9 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
-import LoadingScreen from '../components/LoadingScreen';
 import { useModal } from '../hooks/useModal';
 import { useDelete } from '../hooks/useDelete';
 import Modal from '../components/Modal';
+import LoadingScreen from '../components/LoadingScreen';
 
 const Author = () => {
   const { id } = useParams();
@@ -12,6 +12,8 @@ const Author = () => {
 
   const { data: author } = useFetch(`http://localhost:3000/authors/${id}`);
   const { data: books, isLoading } = useFetch(`http://localhost:3000/books/author/${id}`);
+
+  const hasBooks = books && books.data.length;
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -39,15 +41,11 @@ const Author = () => {
         </div>
       )}
       <ul className="flex flex-col gap-2">
-        {books && books.data.length ? (
-          <h3 className="text-xl font-bold">Books :</h3>
-        ) : (
-          <p>There are no boooks by this author</p>
-        )}
+        {hasBooks ? <h3 className="text-xl font-bold">Books :</h3> : <p>There are no boooks by this author</p>}
 
         {books &&
           books.data.map((book) => (
-            <li className="bg-emerald-400 text-lg w-full rounded p-3" key={book._id}>
+            <li className="bg-emerald-400 text-lg w-1/2 rounded p-3" key={book._id}>
               <Link to={`/books/${book._id}`} className="text-lg text-gray-800 font-semibold flex">
                 {book.title}
               </Link>
@@ -58,7 +56,7 @@ const Author = () => {
         <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
           update
         </Link>
-        {books && !books.data.length && (
+        {hasBooks && (
           <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
             delete
           </button>
