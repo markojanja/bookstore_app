@@ -64,7 +64,7 @@ const deleteAuthor = async (req, res, next) => {
   const { id } = req.params;
   try {
     const author = await Author.findById(id);
-    console.log(author);
+
     if (!author) {
       const err = new Error("Author not found");
       err.status = 404;

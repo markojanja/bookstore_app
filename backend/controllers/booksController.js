@@ -41,15 +41,6 @@ const updateBook = async (req, res, next) => {
 
   const { title, description, pages, genre, author } = req.body;
 
-  console.log("Update request received:", {
-    id,
-    title,
-    description,
-    pages,
-    genre,
-    author,
-  });
-
   try {
     const book = await Book.findById(id);
     if (!book) {
@@ -57,8 +48,6 @@ const updateBook = async (req, res, next) => {
       err.status = 404;
       return next(err);
     }
-
-    console.log("Book before update:", book);
 
     if (title) book.title = title;
     if (description) book.description = description;
@@ -77,7 +66,6 @@ const deleteBook = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    console.log(`Attempting to delete book with id: ${id}`);
     const book = await Book.findById(id);
 
     if (!book) {
@@ -94,7 +82,7 @@ const deleteBook = async (req, res, next) => {
 const getBooksByAuthor = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log(id);
+
     const data = await Book.find({ author: id }).populate("author genre");
     res.status(200).json({ data });
   } catch (error) {

@@ -67,7 +67,7 @@ const deleteGenre = async (req, res, next) => {
   try {
     const { id } = req.params;
     const genre = await Genre.findById(id);
-    console.log(genre);
+
     if (!genre) {
       const err = new Error("Genre not found");
       err.status = 404;
