@@ -12,11 +12,10 @@ const getAuthors = async (req, res, next) => {
 
 const getAuthor = async (req, res, next) => {
   const { id } = req.params;
-  let data;
-  let books;
+
   try {
-    data = await Author.findById(id);
-    books = await Books.find({ author: id }).populate("author genre");
+    const data = await Author.findById(id);
+    const books = await Books.find({ author: id }).populate("author genre");
     if (!data || !books) {
       const err = new Error("Author or books not found");
       err.status = 404;

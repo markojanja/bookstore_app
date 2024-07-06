@@ -12,14 +12,12 @@ const getGenres = async (req, res, next) => {
 
 const getGenre = async (req, res, next) => {
   const { id } = req.params;
-  let genre;
-  let books;
 
   try {
-    genre = await Genre.findById(id);
-    books = await Books.find({ genre: id }).populate("author");
-    if (!genre) {
-      const err = new Error("Genre not found");
+    const genre = await Genre.findById(id);
+    const books = await Books.find({ genre: id }).populate("author");
+    if (!genre || !books) {
+      const err = new Error("Genre or books not found");
       err.status = 404;
       return next(err);
     }
