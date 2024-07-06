@@ -8,20 +8,20 @@ const Home = () => {
   if (isLoading) return <LoadingScreen />;
 
   return (
-    <div className="relative">
+    <>
       {data.data && (
-        <section className="flex flex-col flex-1 ">
-          <div className="flex items-center justify-center p-5 w-4/5 mx-auto">
-            <h1 className="text-4xl font-extrabold">Bookstore</h1>
+        <section className="flex flex-col justify-between">
+          <div className="flex items-center justify-center p-5 w-5/6 md:w-4/5 mx-auto">
+            <h1 className="text-3xl lg:text-7xl font-extrabold">Bookstore</h1>
           </div>
-          <div className="grid grid-cols-3 flex-1 w-4/5 mx-auto px-5 gap-2 pt-10">
+          <div className="grid lg:grid-cols-3 flex-1 items-center w-full md:w-4/5 mx-auto px-5 gap-2 py-5 md:pt-10">
             <CountCard data={data.data.booksCount} label={'Books'} />
             <CountCard data={data.data.authorsCount} label={'Authors'} />
             <CountCard data={data.data.genreCount} label={'Genres'} />
           </div>
         </section>
       )}
-    </div>
+    </>
   );
 };
 

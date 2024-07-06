@@ -1,6 +1,9 @@
 const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, firstName, lastName, bio, label }) => {
   return (
-    <form className="flex flex-col gap-3 w-4/6 mx-auto" onSubmit={handleFormSubmit}>
+    <form
+      className="flex flex-col gap-3 w-3/6 p-3 rounded shadow-md border border-gray-200 mx-auto"
+      onSubmit={handleFormSubmit}
+    >
       <input
         type="text"
         name="firstName"
