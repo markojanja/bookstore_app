@@ -4,16 +4,16 @@ import { useModal } from '../hooks/useModal';
 import { useDelete } from '../hooks/useDelete';
 import Modal from '../components/Modal';
 import LoadingScreen from '../components/LoadingScreen';
+import BookList from '../components/BookList';
 
 const Author = () => {
   const { id } = useParams();
   const { isVisible, toggleModal } = useModal();
   const { deleteItem } = useDelete();
 
-  const { data: author } = useFetch(`http://localhost:3000/authors/${id}`);
-  const { data: books, isLoading } = useFetch(`http://localhost:3000/books/author/${id}`);
+  const { data: author, isLoading, error } = useFetch(`http://localhost:3000/authors/${id}`);
 
-  const hasBooks = books && books.data.length;
+  const hasBooks = author && author.books.length;
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -40,18 +40,9 @@ const Author = () => {
           <p className="text-lg">{author.data.bio}</p>
         </div>
       )}
-      <ul className="flex flex-col gap-2">
-        {hasBooks ? <h3 className="text-xl font-bold">Books :</h3> : <p>There are no boooks by this author</p>}
 
-        {books &&
-          books.data.map((book) => (
-            <li className="bg-emerald-400 text-lg w-1/2 rounded p-3" key={book._id}>
-              <Link to={`/books/${book._id}`} className="text-lg text-gray-800 font-semibold flex">
-                {book.title}
-              </Link>
-            </li>
-          ))}
-      </ul>
+      <BookList data={author} hasBooks={hasBooks} message={'There are no boooks by this author'} />
+
       <div className="flex gap-2">
         <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
           update

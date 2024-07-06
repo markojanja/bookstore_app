@@ -4,6 +4,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import Modal from '../components/Modal';
 import { useModal } from '../hooks/useModal';
 import { useDelete } from '../hooks/useDelete';
+import BookList from '../components/BookList';
 
 const Genre = () => {
   const { id } = useParams();
@@ -16,6 +17,7 @@ const Genre = () => {
   const handleDelete = async () => {
     await deleteItem(`http://localhost:3000/genres/delete/${id}`);
   };
+
   if (isVisible) return <Modal handleDelete={handleDelete} toggleModal={toggleModal} title={data.genre.title} />;
 
   if (isLoading) return <LoadingScreen />;
@@ -24,20 +26,7 @@ const Genre = () => {
     <div className="flex flex-col gap-4 w-4/6 mx-auto mt-5">
       <h2 className="text-2xl font-bold">{data.genre?.title}</h2>
 
-      {hasBooks ? (
-        <ul className="flex flex-col gap-7 items-start justify-center">
-          <h3 className="text-xl font-bold">Books in genre:</h3>
-          {data.books?.map((book) => (
-            <li className="bg-emerald-400 text-lg w-1/2 rounded p-3" key={book._id}>
-              <Link className="text-lg text-gray-800 font-semibold flex" to={`/books/${book._id}`}>
-                {book.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-lg">There are no books currently under {data.genre?.title} genre</p>
-      )}
+      <BookList data={data} hasBooks={hasBooks} message={'There are no books under this genre'} />
 
       <div className="flex gap-2">
         <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/genres/update/${data.genre?._id}`}>
