@@ -1,4 +1,5 @@
 import Author from "../models/author.js";
+import Books from "../models/book.js";
 
 const getAuthors = async (req, res, next) => {
   try {
@@ -12,14 +13,16 @@ const getAuthors = async (req, res, next) => {
 const getAuthor = async (req, res, next) => {
   const { id } = req.params;
   let data;
+  let books;
   try {
     data = await Author.findById(id);
-    if (!data) {
-      const err = new Error("Author not found");
+    books = await Books.find({ author: id }).populate("author genre");
+    if (!data || !books) {
+      const err = new Error("Author or books not found");
       err.status = 404;
       return next(err);
     }
-    res.status(200).json({ data });
+    res.status(200).json({ data, books });
   } catch (error) {
     next(error);
   }
