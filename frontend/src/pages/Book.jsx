@@ -4,12 +4,13 @@ import { useDelete } from '../hooks/useDelete';
 import Modal from '../components/Modal';
 import LoadingScreen from '../components/LoadingScreen';
 import { useModal } from '../hooks/useModal';
+import ErrorPage from '../components/ErrorPage';
 
 const Book = () => {
   const { id } = useParams();
   const { isVisible, toggleModal } = useModal();
-  const { error, deleteItem } = useDelete();
-  const { data: book, isLoading } = useFetch(`http://localhost:3000/books/${id}`);
+  const { deleteItem } = useDelete();
+  const { data: book, isLoading, error } = useFetch(`http://localhost:3000/books/${id}`);
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ const Book = () => {
   };
 
   if (isLoading) return <LoadingScreen />;
-  if (error) return <h1>{error}</h1>;
+  if (error) return <ErrorPage error={error} />;
   if (isVisible) return <Modal handleDelete={handleDelete} title={book.data.title} toggleModal={toggleModal} />;
 
   return (

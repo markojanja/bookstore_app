@@ -5,6 +5,7 @@ import { useDelete } from '../hooks/useDelete';
 import Modal from '../components/Modal';
 import LoadingScreen from '../components/LoadingScreen';
 import BookList from '../components/BookList';
+import ErrorPage from '../components/ErrorPage';
 
 const Author = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const Author = () => {
 
   const { data: author, isLoading, error } = useFetch(`http://localhost:3000/authors/${id}`);
 
-  const hasBooks = author && author.books.length;
+  const hasBooks = author && author.books?.length;
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -21,12 +22,13 @@ const Author = () => {
   };
 
   if (isLoading) return <LoadingScreen />;
+  if (error) return <ErrorPage error={error} />;
   if (isVisible)
     return (
       <Modal
         handleDelete={handleDelete}
         toggleModal={toggleModal}
-        title={`${author.data.firstName} ${author.data.lastName}`}
+        title={`${author.data?.firstName} ${author.data?.lastName}`}
       />
     );
 
@@ -35,9 +37,9 @@ const Author = () => {
       {author && (
         <div className="flex flex-col gap-4">
           <h2 className="text-2xl font-bold">
-            {author.data.firstName} {author.data.lastName}
+            {author.data?.firstName} {author.data?.lastName}
           </h2>
-          <p className="text-lg">{author.data.bio}</p>
+          <p className="text-lg">{author.data?.bio}</p>
         </div>
       )}
 

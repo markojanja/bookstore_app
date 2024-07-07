@@ -13,12 +13,14 @@ import Genre from './pages/Genre';
 import UpdateGenre from './pages/UpdateGenre';
 import UpdateBook from './pages/UpdateBook';
 import UpdateAuthor from './pages/UpdateAuthor';
+import CustomError from './components/CustomError';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Root />,
+      errorElement: <CustomError />,
       children: [
         {
           index: true,
@@ -30,6 +32,7 @@ function App() {
         },
         {
           path: '/books/:id',
+
           element: <Book />,
         },
         {
