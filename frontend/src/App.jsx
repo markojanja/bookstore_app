@@ -32,7 +32,6 @@ function App() {
         },
         {
           path: '/books/:id',
-
           element: <Book />,
         },
         {

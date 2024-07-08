@@ -5,12 +5,13 @@ import Modal from '../components/Modal';
 import { useModal } from '../hooks/useModal';
 import { useDelete } from '../hooks/useDelete';
 import BookList from '../components/BookList';
+import ErrorPage from '../components/ErrorPage';
 
 const Genre = () => {
   const { id } = useParams();
-  const { data, isLoading } = useFetch(`http://localhost:3000/genres/${id}`);
+  const { data, isLoading, error } = useFetch(`http://localhost:3000/genres/${id}`);
   const { isVisible, toggleModal } = useModal();
-  const { error, deleteItem } = useDelete();
+  const { error: err, deleteItem } = useDelete();
 
   const hasBooks = data && data.books.length;
 
@@ -19,7 +20,7 @@ const Genre = () => {
   };
 
   if (isVisible) return <Modal handleDelete={handleDelete} toggleModal={toggleModal} title={data.genre.title} />;
-
+  if (error) return <ErrorPage error={error} />;
   if (isLoading) return <LoadingScreen />;
 
   return (
@@ -38,7 +39,6 @@ const Genre = () => {
           </button>
         )}
       </div>
-      {error && <p>{error}</p>}
     </div>
   );
 };

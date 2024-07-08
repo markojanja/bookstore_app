@@ -2,9 +2,9 @@ import { useRouteError, Link } from 'react-router-dom';
 
 const CustomError = () => {
   const error = useRouteError();
-  console.log(error);
+
   return (
-    <div className="flex flex-col w-full h-screen items-center justify-center">
+    <div className="flex flex-col w-full flex-1 items-center justify-center">
       <h1>Ooops!!!</h1>
       <p>{error.statusText || error.status}</p>
       <p>{error.status}</p>

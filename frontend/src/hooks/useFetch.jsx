@@ -10,13 +10,17 @@ const useFetch = (url) => {
       setIsLoading(true);
       try {
         const res = await fetch(url, { mode: 'cors' });
-        const json = await res.json();
-        setData(json);
         if (!res.ok) {
-          setError(json);
+          const errData = await res.json();
+          setError(errData);
+          return;
         }
+
+        const result = await res.json();
+        setData(result);
       } catch (error) {
         setError(error.message);
+        setData(null);
       } finally {
         setIsLoading(false);
       }
