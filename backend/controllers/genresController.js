@@ -4,7 +4,7 @@ import Books from "../models/book.js";
 const getGenres = async (req, res, next) => {
   try {
     const data = await Genre.find({});
-    res.status(200).json({ statusCode: res.statusCode, status: "ok", data });
+    res.status(200).json({ data });
   } catch (error) {
     next(error);
   }
