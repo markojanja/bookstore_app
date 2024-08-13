@@ -14,6 +14,8 @@ import UpdateGenre from './pages/UpdateGenre';
 import UpdateBook from './pages/UpdateBook';
 import UpdateAuthor from './pages/UpdateAuthor';
 import CustomError from './components/CustomError';
+import Login from './pages/Login';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const router = createBrowserRouter([
@@ -25,6 +27,10 @@ function App() {
         {
           index: true,
           element: <Home />,
+        },
+        {
+          path: '/login',
+          element: <Login />,
         },
         {
           path: '/books',
@@ -78,7 +84,11 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

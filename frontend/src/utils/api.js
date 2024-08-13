@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { logoutService, refreshTokenService } from './auth';
+import { logoutService, refreshTokenService } from './auth.js';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
   withCredentials: true,
 });
 
-api.interceptors.use(
+api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const orifinalRequest = error.config;
