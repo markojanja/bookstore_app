@@ -5,8 +5,10 @@ import Modal from '../components/Modal';
 import LoadingScreen from '../components/LoadingScreen';
 import { useModal } from '../hooks/useModal';
 import ErrorPage from '../components/ErrorPage';
+import useAuth from '../hooks/useAuth';
 
 const Book = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const { isVisible, toggleModal } = useModal();
   const { deleteItem } = useDelete();
@@ -44,14 +46,16 @@ const Book = () => {
           </Link>
         </div>
       )}
-      <div className="flex gap-2 w-5/6 mx-auto">
-        <Link className="bg-emerald-500 text-white px-3 py-2 rounded" to={`/books/update/${id}`}>
-          update
-        </Link>
-        <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
-          delete
-        </button>
-      </div>
+      {user && (
+        <div className="flex gap-2 w-5/6 mx-auto">
+          <Link className="bg-emerald-500 text-white px-3 py-2 rounded" to={`/books/update/${id}`}>
+            update
+          </Link>
+          <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
+            delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Sidebar = () => {
-  const { user, loading, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
+    navigate('/');
   };
   if (user) {
     console.log('this is user: ', user);
   }
-
-  if (loading) return null;
 
   return (
     <div className="hidden md:flex flex-col gap-5 items-center justify-start pt-4 border-r border-r-emerald-500">

@@ -15,6 +15,7 @@ import UpdateBook from './pages/UpdateBook';
 import UpdateAuthor from './pages/UpdateAuthor';
 import CustomError from './components/CustomError';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
         {
           path: '/login',
           element: <Login />,
+        },
+        {
+          path: '/register',
+          element: <Register />,
         },
         {
           path: '/books',
