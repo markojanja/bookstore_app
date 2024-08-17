@@ -17,7 +17,6 @@ export const loginService = async (username, password) => {
     const response = await axios.post(`${API_URL}/login`, { username, password }, { withCredentials: true });
     const { accessToken } = response.data;
     api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
     return response.data;
   } catch (error) {
     throw error;

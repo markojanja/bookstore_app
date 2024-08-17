@@ -6,11 +6,13 @@ import Modal from '../components/Modal';
 import LoadingScreen from '../components/LoadingScreen';
 import BookList from '../components/BookList';
 import ErrorPage from '../components/ErrorPage';
+import useAuth from '../hooks/useAuth';
 
 const Author = () => {
   const { id } = useParams();
   const { isVisible, toggleModal } = useModal();
   const { deleteItem } = useDelete();
+  const { user } = useAuth();
 
   const { data: author, isLoading, error } = useFetch(`http://localhost:3000/authors/${id}`);
 
@@ -44,17 +46,23 @@ const Author = () => {
       )}
 
       <BookList data={author} hasBooks={hasBooks} message={'There are no boooks by this author'} />
-
-      <div className="flex gap-2">
-        <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
-          update
-        </Link>
-        {!hasBooks && (
-          <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
-            delete
-          </button>
-        )}
-      </div>
+      {user && (
+        <div className="flex gap-2">
+          <Link className="bg-emerald-500 text-white px-3 py-2 rounded w-max" to={`/authors/update/${id}`}>
+            update
+          </Link>
+          {!hasBooks && (
+            <button className="bg-red-500 text-white px-3 py-2 cursor-pointer rounded" onClick={toggleModal}>
+              delete
+            </button>
+          )}
+        </div>
+      )}
+      {!user && (
+        <p className="bg-blue-200 border border-blue-500 rounded p-5 text-blue-500 w-1/2">
+          Must be logged in to update author info
+        </p>
+      )}
     </div>
   );
 };

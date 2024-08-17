@@ -26,7 +26,7 @@ const Book = () => {
   return (
     <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
       {book && (
-        <div className="flex flex-col gap-4 w-5/6 mx-auto">
+        <div className="flex flex-col gap-4 w-full mx-auto">
           <h2 className="text-2xl font-bold">{book.data.title}</h2>
           <p className="text-lg">{book.data.description}</p>
           <p className="text-lg">
@@ -47,7 +47,7 @@ const Book = () => {
         </div>
       )}
       {user && (
-        <div className="flex gap-2 w-5/6 mx-auto">
+        <div className="flex gap-2 w-full mx-auto self-start">
           <Link className="bg-emerald-500 text-white px-3 py-2 rounded" to={`/books/update/${id}`}>
             update
           </Link>
@@ -55,6 +55,11 @@ const Book = () => {
             delete
           </button>
         </div>
+      )}
+      {!user && (
+        <p className="bg-blue-200 border border-blue-500 rounded p-5 text-blue-500 self-start w-max">
+          must be logged in to update book info
+        </p>
       )}
     </div>
   );

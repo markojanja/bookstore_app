@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookForm from '../components/BookForm';
+import useAuth from '../hooks/useAuth';
 
 const CreateBook = () => {
+  const { token } = useAuth();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -41,6 +43,7 @@ const CreateBook = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = {
       title,
       description,
@@ -54,6 +57,7 @@ const CreateBook = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });

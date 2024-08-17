@@ -94,7 +94,11 @@ export const refreshToken = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
           })
-          .json({ username: user.username, message: "refreshTokenCreated" });
+          .json({
+            username: user.username,
+            message: "refreshTokenCreated",
+            accessToken: accessToken,
+          });
       }
     );
   } catch (error) {
