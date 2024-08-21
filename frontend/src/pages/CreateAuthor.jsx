@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthorForm from '../components/AuthorForm';
+import api from '../utils/api';
 
 const CreateAuthor = () => {
   const [firstName, setFirstName] = useState('');
@@ -18,15 +19,9 @@ const CreateAuthor = () => {
     };
 
     try {
-      await fetch(`http://localhost:3000/authors/create/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      navigate('/authors');
+      const response = await api.post(`/authors/create/`, data);
+      navigate('/authors', { replace: true });
+      return response.data;
     } catch (error) {
       console.log(error);
     }

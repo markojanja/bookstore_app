@@ -18,7 +18,7 @@ router.post("/create", authValidation, createBook);
 router.get("/author/:id", validateObjectId, getBooksByAuthor);
 router.get("/genre/:id", validateObjectId, getBooksByGenre);
 router.get("/:id", validateObjectId, getSingleBook);
-router.patch("/update/:id", validateObjectId, updateBook);
-router.delete("/delete/:id", validateObjectId, deleteBook);
+router.patch("/update/:id", authValidation, validateObjectId, updateBook);
+router.delete("/delete/:id", authValidation, validateObjectId, deleteBook);
 
 export default router;

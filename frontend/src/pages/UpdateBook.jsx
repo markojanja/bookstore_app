@@ -3,6 +3,7 @@ import useFetch from '../hooks/useFetch';
 import BookForm from '../components/BookForm';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingScreen from '../components/LoadingScreen';
+import api from '../utils/api';
 
 const UpdateBook = () => {
   const { id } = useParams();
@@ -48,15 +49,8 @@ const UpdateBook = () => {
     };
 
     try {
-      await fetch(`http://localhost:3000/books/update/${id}`, {
-        mode: 'cors',
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedBook),
-      });
-      navigate('/books');
+      await api.patch(`/books/update/${id}`, updatedBook);
+      navigate('/books', { replace: true });
     } catch (error) {
       console.error('Failed to update book:', error);
     }

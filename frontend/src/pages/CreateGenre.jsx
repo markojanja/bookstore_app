@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GenreForm from '../components/GenreForm';
+import api from '../utils/api';
 
 const CreateGenre = () => {
   const [title, setTitle] = useState('');
@@ -13,20 +14,8 @@ const CreateGenre = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const resp = await fetch(`http://localhost:3000/genres/create`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title }),
-      });
-
-      const json = await resp.json();
-      if (!resp.ok) {
-        setError(json.message);
-      } else {
-        navigate('/genres');
-      }
+      const resp = await api.post(`/genres/create`, { title });
+      navigate('/genres', { replace: true });
     } catch (error) {
       setError('Whoops something went wrong');
       console.log(error);

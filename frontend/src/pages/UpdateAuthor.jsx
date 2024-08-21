@@ -3,6 +3,7 @@ import useFetch from '../hooks/useFetch';
 import AuthorForm from '../components/AuthorForm';
 import { useNavigate, useParams } from 'react-router-dom';
 import LoadingScreen from '../components/LoadingScreen';
+import api from '../utils/api';
 
 const UpdateAuthor = () => {
   const { id } = useParams();
@@ -31,15 +32,8 @@ const UpdateAuthor = () => {
     };
 
     try {
-      await fetch(`http://localhost:3000/authors/update/${id}`, {
-        mode: 'cors',
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
-      navigate(-1);
+      await api.patch(`http://localhost:3000/authors/update/${id}`, updatedData);
+      navigate(-1, { replace: true });
     } catch (error) {
       console.log(error);
     }

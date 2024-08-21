@@ -45,20 +45,7 @@ function App() {
           path: '/books/:id',
           element: <Book />,
         },
-        {
-          path: '/books/create',
-          element: <ProtectedPage />,
-          children: [
-            {
-              index: true,
-              element: <CreateBook />,
-            },
-          ],
-        },
-        {
-          path: '/books/update/:id',
-          element: <UpdateBook />,
-        },
+
         {
           path: '/authors',
           element: <Authors />,
@@ -67,14 +54,7 @@ function App() {
           path: '/authors/:id',
           element: <Author />,
         },
-        {
-          path: '/authors/create',
-          element: <CreateAuthor />,
-        },
-        {
-          path: '/authors/update/:id',
-          element: <UpdateAuthor />,
-        },
+
         {
           path: '/genres/',
           element: <Genres />,
@@ -83,13 +63,37 @@ function App() {
           path: '/genres/:id',
           element: <Genre />,
         },
+
         {
-          path: '/genres/create',
-          element: <CreateGenre />,
-        },
-        {
-          path: '/genres/update/:id',
-          element: <UpdateGenre />,
+          path: '/',
+          element: <ProtectedPage />,
+          children: [
+            {
+              path: '/books/create',
+              element: <CreateBook />,
+            },
+            {
+              path: '/books/update/:id',
+              element: <UpdateBook />,
+            },
+            {
+              path: '/authors/create',
+              element: <CreateAuthor />,
+            },
+            {
+              path: '/authors/update/:id',
+              element: <UpdateAuthor />,
+            },
+
+            {
+              path: '/genres/create',
+              element: <CreateGenre />,
+            },
+            {
+              path: '/genres/update/:id',
+              element: <UpdateGenre />,
+            },
+          ],
         },
       ],
     },

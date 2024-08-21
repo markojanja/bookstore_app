@@ -8,13 +8,14 @@ import {
   getGenres,
   updateGenre,
 } from "../controllers/genresController.js";
+import authValidation from "../middleware/authValidation.js";
 
 const router = express.Router();
 
 router.get("/", getGenres);
-router.post("/create", createGenre);
+router.post("/create", authValidation, createGenre);
 router.get("/:id", validateObjectId, getGenre);
-router.patch("/update/:id", validateObjectId, updateGenre);
-router.delete("/delete/:id", validateObjectId, deleteGenre);
+router.patch("/update/:id", authValidation, validateObjectId, updateGenre);
+router.delete("/delete/:id", authValidation, validateObjectId, deleteGenre);
 
 export default router;

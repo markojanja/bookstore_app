@@ -49,7 +49,7 @@ const CreateBook = () => {
     };
     try {
       const response = await api.post(`/books/create`, data);
-      navigate('/books');
+      navigate('/books', { replace: true });
       return response.data;
     } catch (error) {
       // Optionally log the error or handle it in a specific way

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import GenreForm from '../components/GenreForm';
 import LoadingScreen from '../components/LoadingScreen';
+import api from '../utils/api';
 
 const UpdateGenre = () => {
   const [title, setTitle] = useState('');
@@ -20,15 +21,8 @@ const UpdateGenre = () => {
     e.preventDefault();
 
     try {
-      await fetch(`http://localhost:3000/genres/update/${id}`, {
-        mode: 'cors',
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title: title }),
-      });
-      navigate(-1);
+      await api.patch(`/genres/update/${id}`, { title });
+      navigate(-1, { replace: true });
     } catch (error) {
       console.log(error);
     }
