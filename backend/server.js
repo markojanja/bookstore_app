@@ -23,6 +23,8 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/", authRoute);
+
 app.use("/", rootRouter);
 
 app.use("/books", booksRouter);
@@ -30,8 +32,6 @@ app.use("/books", booksRouter);
 app.use("/authors", authorsRoute);
 
 app.use("/genres", genresRoute);
-
-app.use("/", authRoute);
 
 app.get("/*", async (req, res) => {
   res.status(404).json({ message: "not found" });

@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import LoadingScreen from '../components/LoadingScreen';
+import ErrorPage from '../components/ErrorPage';
 
 const Books = () => {
   const { data: books, isLoading, error } = useFetch('http://localhost:3000/books');
 
   if (isLoading) return <LoadingScreen />;
-  if (error) return <h1>{error}</h1>;
+  if (error) return <ErrorPage error={error} />;
 
   return (
     <div className="flex flex-col gap-3 w-5/6 mx-auto mt-5">

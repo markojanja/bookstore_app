@@ -6,44 +6,38 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const { username, accessToken } = await refreshTokenService();
-        setToken(accessToken);
+        const { username } = await refreshTokenService();
         setUser(username);
       } catch (error) {
-        console.log(error);
-        setToken(null);
         setUser(null);
       } finally {
         setLoading(false);
       }
     };
     checkLoggedIn();
-  }, [user, token]);
+  }, []);
 
   const register = async (username, password) => {
     try {
       await registerService(username, password);
-      const { userData } = await loginService(username, password);
-      setUser(userData);
+      const { user } = await loginService(username, password);
+      setUser(user.user);
     } catch (error) {
-      console.log('registration failed: ', error);
+      console.log('Registration failed:', error);
     }
   };
 
   const login = async (username, password) => {
     try {
-      const { userData, accessToken } = await loginService(username, password);
+      const { user } = await loginService(username, password);
 
-      setUser(userData);
-      setToken(accessToken);
-      console.log(accessToken);
+      setUser(user.user);
     } catch (error) {
-      console.log('error logging in: ', error);
+      console.error('Error logging in:', error);
     }
   };
 
@@ -51,15 +45,12 @@ const AuthProvider = ({ children }) => {
     try {
       await logoutService();
       setUser(null);
-      setToken(null);
     } catch (error) {
-      console.log('error loggin out', error);
+      console.log('Error logging out:', error);
     }
   };
 
-  return (
-    <AuthContext.Provider value={{ user, loading, register, login, logout, token }}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, loading, register, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 export { AuthContext, AuthProvider };

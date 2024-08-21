@@ -16,7 +16,7 @@ import UpdateAuthor from './pages/UpdateAuthor';
 import CustomError from './components/CustomError';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { AuthProvider } from './context/AuthContext';
+import ProtectedPage from './components/ProtectedPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -47,7 +47,13 @@ function App() {
         },
         {
           path: '/books/create',
-          element: <CreateBook />,
+          element: <ProtectedPage />,
+          children: [
+            {
+              index: true,
+              element: <CreateBook />,
+            },
+          ],
         },
         {
           path: '/books/update/:id',
@@ -89,11 +95,7 @@ function App() {
     },
   ]);
 
-  return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

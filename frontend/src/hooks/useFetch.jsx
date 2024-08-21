@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const useFetch = (url) => {
@@ -9,16 +10,10 @@ const useFetch = (url) => {
     const fetchData = async (url) => {
       setIsLoading(true);
       try {
-        const res = await fetch(url, { mode: 'cors' });
-        if (!res.ok) {
-          const errData = await res.json();
-          setError(errData);
-          return;
-        }
-
-        const result = await res.json();
-        setData(result);
+        const res = await axios.get(url);
+        setData(res.data);
       } catch (error) {
+        console.log(error);
         setError(error.message);
         setData(null);
       } finally {

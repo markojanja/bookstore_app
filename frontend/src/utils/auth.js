@@ -7,7 +7,7 @@ export const registerService = async (username, password) => {
   try {
     await axios.post(`${API_URL}/register`, { username, password }, { withCredentials: true });
   } catch (error) {
-    console.log('Registration error: ', error);
+    console.error('Registration error: ', error.response ? error.response.data : error.message);
     throw error;
   }
 };
@@ -19,6 +19,7 @@ export const loginService = async (username, password) => {
     api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
     return response.data;
   } catch (error) {
+    console.error('Login error: ', error.response ? error.response.data : error.message);
     throw error;
   }
 };
@@ -28,9 +29,9 @@ export const refreshTokenService = async () => {
     const response = await axios.post(`${API_URL}/refresh-token`, {}, { withCredentials: true });
     const { accessToken } = response.data;
     api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
     return response.data;
   } catch (error) {
+    console.error('Refresh token error: ', error.response ? error.response.data : error.message);
     throw error;
   }
 };
@@ -40,7 +41,7 @@ export const logoutService = async () => {
     await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
     delete api.defaults.headers.common['Authorization'];
   } catch (error) {
-    console.error('Logout error:');
+    console.error('Logout error: ', error.response ? error.response.data : error.message);
     throw error;
   }
 };

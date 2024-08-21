@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BookForm from '../components/BookForm';
-import useAuth from '../hooks/useAuth';
+import api from '../utils/api';
+import axios from 'axios';
 
 const CreateBook = () => {
-  const { token } = useAuth();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -17,11 +17,8 @@ const CreateBook = () => {
   useEffect(() => {
     const fetchAuthors = async () => {
       try {
-        const res = await fetch('http://localhost:3000/authors/', {
-          mode: 'cors',
-        });
-        const authorsData = await res.json();
-        setAuthors(authorsData.data);
+        const response = await axios.get('http://localhost:3000/authors');
+        setAuthors(response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -29,9 +26,8 @@ const CreateBook = () => {
 
     const fetchGenres = async () => {
       try {
-        const res = await fetch('http://localhost:3000/genres/');
-        const genresData = await res.json();
-        setGenres(genresData.data);
+        const response = await axios.get('http://localhost:3000/genres');
+        setGenres(response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -51,19 +47,14 @@ const CreateBook = () => {
       genre,
       author,
     };
-
     try {
-      await fetch('http://localhost:3000/books/create', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await api.post(`/books/create`, data);
       navigate('/books');
+      return response.data;
     } catch (error) {
-      console.log(error);
+      // Optionally log the error or handle it in a specific way
+      console.error('Error creating book:', error);
+      throw error;
     }
   };
 

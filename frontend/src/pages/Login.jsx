@@ -3,15 +3,20 @@ import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    login(username, password);
-    navigate('/', { replace: true });
+    try {
+      await login(username, password);
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.log('Login failed:', error);
+      // Optionally set an error state and display it to the user
+    }
   };
 
   return (
@@ -26,12 +31,14 @@ const Login = () => {
           type="text"
           placeholder="username"
           name="username"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           placeholder="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">
