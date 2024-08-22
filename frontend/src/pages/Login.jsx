@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const { login, error, setError } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setError(null);
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await login(username, password);
-      navigate('/', { replace: true });
-    } catch (error) {
-      console.log('Login failed:', error);
-      // Optionally set an error state and display it to the user
+
+    const result = await login(username, password);
+
+    if (result) {
+      navigate('/books', { replace: true });
     }
   };
 
@@ -45,6 +48,7 @@ const Login = () => {
           LogIn
         </button>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 };

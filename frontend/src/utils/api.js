@@ -3,7 +3,7 @@ import { logoutService, refreshTokenService } from './auth.js';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000',
-  withCredentials: true, // Ensure cookies are sent with requests
+  withCredentials: true,
 });
 
 api.interceptors.response.use(
@@ -11,29 +11,24 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // If we get a 401 error, try refreshing the token
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        const { data } = await refreshTokenService();
-        // The server should update the cookie with the new access token
-
-        // Retry the original request
+        await refreshTokenService();
         return api(originalRequest);
       } catch (refreshError) {
-        console.log('Token refresh failed:', refreshError);
-        await logoutService(); // Log out if refresh fails
+        // console.log('Token refresh failed:', refreshError);
+        await logoutService();
         return Promise.reject(refreshError);
       }
     }
 
-    // Handle other types of errors
     if (error.response.status === 403) {
       try {
         await logoutService();
       } catch (logoutError) {
-        console.log('Logout failed:', logoutError);
+        // console.log('Logout failed:', logoutError);
       }
     }
 

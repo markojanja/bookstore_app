@@ -3,24 +3,38 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 const Register = () => {
-  const { register } = useAuth();
+  const { register, error, setError } = useAuth();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [validMatch, setValidMatch] = useState(false);
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  useEffect(() => {
+    setError(null);
+  }, []);
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    register(username, confirmPassword);
-    navigate('/books');
+
+    const result = await register(username, confirmPassword);
+    if (result) {
+      navigate('/books');
+    }
   };
 
   useEffect(() => {
-    if (password) {
-      const match = password === confirmPassword;
-      console.log(match);
+    const match = password === confirmPassword;
+
+    if (password && confirmPassword && !match) {
+      console.log('passwords do not match');
+      setError('passwords do not match');
       setValidMatch(match);
+    }
+    if (password && confirmPassword && match) {
+      setValidMatch(match);
+      setError(null);
     }
   }, [password, confirmPassword]);
 
@@ -59,11 +73,12 @@ const Register = () => {
         <button
           className="bg-emerald-500 text-white py-3 px-5 rounded self-center"
           type="submit"
-          disabled={validMatch ? false : true}
+          disabled={!validMatch ? true : false}
         >
           register
         </button>
       </form>
+      {error && <p>{error}</p>}
     </div>
   );
 };

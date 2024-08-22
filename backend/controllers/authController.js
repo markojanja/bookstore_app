@@ -21,7 +21,6 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  // login
   const { username, password } = req.body;
   try {
     const user = await Users.findOne({ username });
@@ -40,7 +39,10 @@ export const login = async (req, res) => {
     );
     const refreshToken = jwt.sign(
       { username },
-      process.env.REFRESH_TOKEN_SECRET
+      process.env.REFRESH_TOKEN_SECRET,
+      {
+        expiresIn: "7d",
+      }
     );
     user.refreshToken = refreshToken;
     await user.save();
@@ -49,6 +51,7 @@ export const login = async (req, res) => {
       .cookie("token", refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
+        maxAge: 24 * 60 * 60 * 1000,
       })
       .json({ accessToken, user: { user: user.username } });
   } catch (error) {
@@ -58,8 +61,6 @@ export const login = async (req, res) => {
 };
 
 export const refreshToken = async (req, res) => {
-  //refresh token
-
   const { token } = req.cookies;
   if (!token) {
     return res.sendStatus(401);
@@ -93,6 +94,7 @@ export const refreshToken = async (req, res) => {
           .cookie("token", newRefreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
           })
           .json({
             username: user.username,

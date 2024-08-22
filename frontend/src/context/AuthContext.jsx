@@ -6,6 +6,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -26,18 +27,23 @@ const AuthProvider = ({ children }) => {
       await registerService(username, password);
       const { user } = await loginService(username, password);
       setUser(user.user);
+
+      return user.user;
     } catch (error) {
-      console.log('Registration failed:', error);
+      console.log('Registration failed:', error.response.data);
+      setError(error.response.data.message);
     }
   };
 
   const login = async (username, password) => {
     try {
-      const { user } = await loginService(username, password);
+      const response = await loginService(username, password);
 
-      setUser(user.user);
+      setUser(response.user.user);
+
+      return response;
     } catch (error) {
-      console.error('Error logging in:', error);
+      setError(error.response.data.message);
     }
   };
 
@@ -50,7 +56,11 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  return <AuthContext.Provider value={{ user, loading, register, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, loading, error, setError, register, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthContext, AuthProvider };
