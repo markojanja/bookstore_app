@@ -7,6 +7,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import BookList from '../components/BookList';
 import ErrorPage from '../components/ErrorPage';
 import useAuth from '../hooks/useAuth';
+import InfoBox from '../components/InfoBox';
 
 const Author = () => {
   const { id } = useParams();
@@ -58,11 +59,7 @@ const Author = () => {
           )}
         </div>
       )}
-      {!user && (
-        <p className="bg-blue-200 border border-blue-500 rounded p-5 text-blue-500 w-1/2">
-          Must be logged in to update author info
-        </p>
-      )}
+      {!user && <InfoBox message={'Must be logged in to edit author info'} />}
     </div>
   );
 };

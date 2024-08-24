@@ -19,6 +19,11 @@ const Sidebar = () => {
     <div className="hidden md:flex flex-col gap-5 items-center justify-start pt-4 border-r border-r-emerald-500">
       <ul className="flex flex-col gap-2 items-start w-4/6 mx-auto">
         <li className="font-semibold">
+          <Link to={'/'} aria-label="Home">
+            Home
+          </Link>
+        </li>
+        <li className="font-semibold">
           <Link to={'/books'} aria-label="Books">
             Books
           </Link>

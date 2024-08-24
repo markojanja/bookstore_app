@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 const Navbar = () => {
   const { user } = useAuth();
   return (
-    <nav className="flex items-center justify-between p-3 shadow">
+    <nav className="flex items-center justify-between p-3 shadow bg-gray-950/95 text-white">
       <Link className="font-bold text-lg text-emerald-500" to={'/'}>
         BookStoreApp
       </Link>

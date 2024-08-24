@@ -6,6 +6,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import { useModal } from '../hooks/useModal';
 import ErrorPage from '../components/ErrorPage';
 import useAuth from '../hooks/useAuth';
+import InfoBox from '../components/InfoBox';
 
 const Book = () => {
   const { user } = useAuth();
@@ -56,11 +57,7 @@ const Book = () => {
           </button>
         </div>
       )}
-      {!user && (
-        <p className="bg-blue-200 border border-blue-500 rounded p-5 text-blue-500 self-start w-max">
-          must be logged in to update book info
-        </p>
-      )}
+      {!user && <InfoBox message={'Must be logged in to edit book info'} />}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
         placeholder="first name"
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
       />
       <input
         type="text"
@@ -20,7 +20,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
         placeholder="last name"
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
       />
 
       <textarea
@@ -29,7 +29,7 @@ const AuthorForm = ({ handleFormSubmit, setFirstName, setLastName, setBio, first
         placeholder="authors bio"
         value={bio}
         onChange={(e) => setBio(e.target.value)}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800 min-h-52"
       ></textarea>
       <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">
         {label}

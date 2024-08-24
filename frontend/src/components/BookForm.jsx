@@ -20,7 +20,7 @@ const BookForm = ({
       onSubmit={handleSubmit}
     >
       <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         type="text"
         name="title"
         id="title"
@@ -29,7 +29,7 @@ const BookForm = ({
         onChange={(e) => setTitle(e.target.value)}
       />
       <textarea
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline min-h-52"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800 min-h-52"
         name="description"
         id="description"
         placeholder="book description"
@@ -37,7 +37,7 @@ const BookForm = ({
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
       <input
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         type="number"
         placeholder="number of pages"
         min={0}
@@ -45,7 +45,7 @@ const BookForm = ({
         onChange={(e) => setPages(e.target.value)}
       />
       <select
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         name="genre"
         id="genre"
         onChange={(e) => setGenre(e.target.value)}
@@ -59,7 +59,7 @@ const BookForm = ({
         ))}
       </select>
       <select
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         name="author"
         id="author"
         onChange={(e) => setAuthor(e.target.value)}

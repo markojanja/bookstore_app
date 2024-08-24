@@ -45,27 +45,33 @@ const Register = () => {
         className="flex flex-col gap-3 w-3/6 p-3 rounded shadow-md border border-gray-200 mx-auto"
         onSubmit={handleRegister}
       >
+        <label htmlFor="username">Username:</label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
           type="text"
           placeholder="username"
           name="username"
+          id="username"
           onChange={(e) => setUsername(e.target.value)}
         />
+        <label htmlFor="password">Password:</label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
           type="password"
           placeholder="password"
           name="password"
+          id="password"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
+        <label htmlFor="confirm_password">Confirm password:</label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
           type="password"
           placeholder="confirm password"
           name="confirm password"
+          id="confirm_password"
           onChange={(e) => {
             setConfirmPassword(e.target.value);
           }}
@@ -77,8 +83,12 @@ const Register = () => {
         >
           register
         </button>
+        {error && (
+          <p className="self-center bg-red-300 text-red-700 text-center border border-red-700 rounded p-3 w-full ">
+            {error}
+          </p>
+        )}
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 };

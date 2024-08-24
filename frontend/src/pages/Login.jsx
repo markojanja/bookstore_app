@@ -29,16 +29,18 @@ const Login = () => {
         className="flex flex-col gap-3 w-3/6 p-3 rounded shadow-md border border-gray-200 mx-auto"
         onSubmit={handleLogin}
       >
+        <label>Username:</label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
           type="text"
           placeholder="username"
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <label>Password:</label>
         <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
           type="password"
           placeholder="password"
           value={password}
@@ -47,8 +49,12 @@ const Login = () => {
         <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">
           LogIn
         </button>
+        {error && (
+          <p className="self-center bg-red-300 text-red-700 text-center border border-red-700 rounded p-3 w-full ">
+            {error}
+          </p>
+        )}
       </form>
-      {error && <p>{error}</p>}
     </div>
   );
 };

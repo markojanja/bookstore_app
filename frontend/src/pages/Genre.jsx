@@ -7,6 +7,7 @@ import { useDelete } from '../hooks/useDelete';
 import BookList from '../components/BookList';
 import ErrorPage from '../components/ErrorPage';
 import useAuth from '../hooks/useAuth';
+import InfoBox from '../components/InfoBox';
 
 const Genre = () => {
   const { user } = useAuth();
@@ -44,11 +45,7 @@ const Genre = () => {
         </div>
       )}
 
-      {!user && (
-        <p className="bg-blue-200 border border-blue-500 rounded p-5 text-blue-500 w-1/2">
-          must be logged in to update genre
-        </p>
-      )}
+      {!user && <InfoBox message={'Must be logged in to edit genre info'} />}
     </div>
   );
 };
