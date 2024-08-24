@@ -11,7 +11,7 @@ const GenreForm = ({ handleFormSubmit, title, handleChange, err, label }) => {
         value={title}
         placeholder="genre title"
         onChange={handleChange}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
       />
 
       <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">

@@ -20,12 +20,30 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   const { username, password } = req.body;
+
+  console.log(req.body);
   try {
+    if (!username && !password) {
+      const err = new Error("Invalid credentials");
+      err.status = 400;
+      return next(err);
+    }
+    if (!password) {
+      const err = new Error("password required");
+      err.status = 400;
+      return next(err);
+    }
+    if (!username) {
+      const err = new Error("username required");
+      err.status = 400;
+      return next(err);
+    }
+
     const user = await Users.findOne({ username });
-    console.log(user);
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!user || !isMatch) {
       return res.status(403).json({ message: "Invalid credentials" });
     }
@@ -56,7 +74,7 @@ export const login = async (req, res) => {
       .json({ accessToken, user: { user: user.username } });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Error loggin user" });
+    next(error);
   }
 };
 
