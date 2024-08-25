@@ -1,10 +1,19 @@
+import { useEffect, useRef } from 'react';
+
 const GenreForm = ({ handleFormSubmit, title, handleChange, err, label }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <form
       className="flex flex-col gap-3 w-3/6 p-3 rounded shadow-md border border-gray-200 mx-auto"
       onSubmit={handleFormSubmit}
     >
       <input
+        ref={inputRef}
         type="text"
         name="title"
         id="title"

@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 const BookForm = ({
   handleSubmit,
   setTitle,
@@ -14,12 +16,19 @@ const BookForm = ({
   authors,
   label,
 }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <form
       className="flex flex-col gap-3 w-3/6 p-3 rounded shadow-md border border-gray-200 mx-auto"
       onSubmit={handleSubmit}
     >
       <input
+        ref={inputRef}
         className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         type="text"
         name="title"
