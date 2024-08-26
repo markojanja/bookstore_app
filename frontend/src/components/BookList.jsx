@@ -7,7 +7,7 @@ const BookList = ({ data, hasBooks, message }) => {
 
       {data &&
         data.books.map((book) => (
-          <li className="bg-emerald-400 text-lg w-1/2 rounded p-3" key={book._id}>
+          <li className="bg-emerald-400 text-lg w-full rounded p-3" key={book._id}>
             <Link to={`/books/${book._id}`} className="text-lg text-gray-800 font-semibold flex">
               {book.title}
             </Link>

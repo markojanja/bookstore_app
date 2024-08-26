@@ -39,19 +39,19 @@ const Sidebar = () => {
           </Link>
         </li>
       </ul>
-      <div className="w-4/6 bg-gray-200 h-[2px]"></div>
+      <div className="w-4/6 bg-emerald-500 h-[1px]"></div>
 
       <ul className="flex flex-col gap-2 items-start w-4/6 mx-auto">
         {user ? (
           <>
             <li className="font-semibold">
               <Link to={'/books/create'} aria-label="Add Books">
-                Add Books
+                Add Book
               </Link>
             </li>
             <li className="font-semibold">
               <Link to={'/authors/create'} aria-label="Add Authors">
-                Add Authors
+                Add Author
               </Link>
             </li>
             <li className="font-semibold">

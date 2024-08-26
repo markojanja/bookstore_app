@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import BookForm from '../components/BookForm';
 import api from '../utils/api';
 import axios from 'axios';
+import useAuth from '../hooks/useAuth';
 
 const CreateBook = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -13,6 +15,13 @@ const CreateBook = () => {
   const [author, setAuthor] = useState('');
   const [genres, setGenres] = useState([]);
   const [authors, setAuthors] = useState([]);
+
+  useEffect(() => {
+    // Navigate only after component mounts and user/loading state is determined
+    if (!user) {
+      navigate('/'); // Redirect to home if not authenticated
+    }
+  }, [navigate, user]);
 
   useEffect(() => {
     const fetchAuthors = async () => {
@@ -26,7 +35,7 @@ const CreateBook = () => {
 
     const fetchGenres = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/genres');
+        const response = await api.get('http://localhost:3000/genres');
         setGenres(response.data.data);
       } catch (error) {
         console.log(error);
@@ -54,6 +63,7 @@ const CreateBook = () => {
     } catch (error) {
       // Optionally log the error or handle it in a specific way
       console.error('Error creating book:', error);
+
       throw error;
     }
   };

@@ -27,8 +27,8 @@ const Genre = () => {
   if (isLoading) return <LoadingScreen />;
 
   return (
-    <div className="flex flex-col gap-4 w-4/6 mx-auto mt-5">
-      <h2 className="text-2xl font-bold">{data.genre?.title}</h2>
+    <div className="flex flex-col gap-4 w-1/3 mx-auto mt-5">
+      <h2 className="text-3xl font-bold">{data.genre?.title}</h2>
 
       <BookList data={data} hasBooks={hasBooks} message={'There are no books under this genre'} />
 

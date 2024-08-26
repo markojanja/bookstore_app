@@ -36,10 +36,10 @@ const Author = () => {
     );
 
   return (
-    <div className="flex flex-col gap-4 w-4/6 mx-auto mt-5">
+    <div className="flex flex-col gap-4 w-1/3 mx-auto mt-5">
       {author && (
         <div className="flex flex-col gap-4">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-3xl font-bold">
             {author.data?.firstName} {author.data?.lastName}
           </h2>
           <p className="text-lg">{author.data?.bio}</p>

@@ -8,7 +8,7 @@ const Genres = () => {
   if (isLoading) return <LoadingScreen />;
 
   return (
-    <div className="flex flex-col gap-3 w-5/6 mx-auto mt-5">
+    <div className="flex flex-col gap-3 w-1/2 mx-auto mt-5">
       <h2 className="text-2xl font-semibold w-2/3 mx-auto">Genres</h2>
       <ul className="flex flex-col gap-2 w-2/3 mx-auto">
         {genres.data.map((genre) => (

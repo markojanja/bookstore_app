@@ -25,10 +25,10 @@ const Book = () => {
   if (isVisible) return <Modal handleDelete={handleDelete} title={book.data.title} toggleModal={toggleModal} />;
 
   return (
-    <div className="flex flex-col gap-3 w-4/6 mx-auto mt-5">
+    <div className="flex flex-col gap-3 w-1/3 mx-auto mt-5">
       {book && (
         <div className="flex flex-col gap-4 w-full mx-auto">
-          <h2 className="text-2xl font-bold">{book.data.title}</h2>
+          <h2 className="text-3xl font-bold">{book.data.title}</h2>
           <p className="text-lg">{book.data.description}</p>
           <p className="text-lg">
             Author:

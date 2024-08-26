@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const BookForm = ({
   handleSubmit,
@@ -49,18 +50,18 @@ const BookForm = ({
         className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         type="number"
         placeholder="number of pages"
-        min={0}
+        min={1}
         value={pages}
         onChange={(e) => setPages(e.target.value)}
       />
       <select
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
+        className="shadow appearance-none border cursor-pointer rounded w-full py-2 px-3 text-white bg-gray-900 leading-tight focus:outline-none focus:shadow-outline focus:bg-gray-800"
         name="genre"
         id="genre"
         onChange={(e) => setGenre(e.target.value)}
         value={genre}
       >
-        <option value={genre ? genre._id : ''}>{genre ? genre.title : 'select genre'}</option>
+        <option value={genre ? genre._id : 'select genre'}>{genre.title ? genre.title : 'select genre'}</option>
         {genres.map((genre) => (
           <option key={genre._id} value={genre._id}>
             {genre.title}
@@ -75,7 +76,7 @@ const BookForm = ({
         value={author}
       >
         <option value={author ? author._id : ''}>
-          {author ? `${author.firstName} ${author.lastName}` : 'select author'}
+          {author.firstName ? `${author?.firstName} ${author?.lastName}` : 'select author'}
         </option>
 
         {authors.map((author) => (
@@ -84,6 +85,17 @@ const BookForm = ({
           </option>
         ))}
       </select>
+      <span>
+        Genre or Author not found? Create{' '}
+        <Link className="text-blue-500" to="/genres/create">
+          genre
+        </Link>{' '}
+        or{' '}
+        <Link className="text-blue-500" to={'/authors/create'}>
+          author
+        </Link>{' '}
+        first.
+      </span>
       <button className="bg-emerald-500 text-white py-3 px-5 rounded self-center" type="submit">
         {label}
       </button>

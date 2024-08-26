@@ -9,7 +9,7 @@ const Authors = () => {
   if (error) return <h1>error</h1>;
 
   return (
-    <div className="flex flex-col gap-3 w-5/6 mx-auto mt-5">
+    <div className="flex flex-col gap-3 w-1/2 mx-auto mt-5">
       <h2 className="text-2xl font-semibold w-2/3 mx-auto">Authors</h2>
       <ul className="flex flex-col gap-2 w-2/3 mx-auto">
         {authors.data.map((author) => (
